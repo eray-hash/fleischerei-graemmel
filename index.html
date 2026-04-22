@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grämmel — Fleischermeister in Detmold seit 1902</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Anthrazit + Eiche */
+    --bg: #1c1e20;
+    --bg-deep: #141618;
+    --panel: #232528;
+    --surface: #20222514;
+    --ink: #eae4d6;
+    --ink-dim: #b0a99a;
+    --mute: #767062;
+    --line: rgba(234,228,214,0.10);
+    --line-soft: rgba(234,228,214,0.06);
+    --accent: #b88a4a;          /* Eiche */
+    --accent-deep: #8a6332;
+    --accent-soft: #d9b07a;
+
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body { overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  ::selection { background: var(--accent); color: #120a06; }
+
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 56px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); }
+
+  /* ————— Announcement bar ————— */
+  .announce {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-deep);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .announce .wrap { display: flex; justify-content: space-between; padding-top: 10px; padding-bottom: 10px; }
+  .announce .left { display: flex; gap: 28px; flex-wrap: wrap; }
+  .announce .pulse { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); }
+  .pulse::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #a8c080; box-shadow: 0 0 0 0 rgba(168,192,128,.6); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 7px rgba(168,192,128,0); } 100% { box-shadow: 0 0 0 0 rgba(168,192,128,0); } }
+
+  /* ————— Nav ————— */
+  nav.top { position: sticky; top: 0; z-index: 20; background: rgba(28,30,32,.82); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-img { width: 52px; height: 52px; border-radius: 50%; display: block; }
+  .logo-name { line-height: 1; }
+  .logo-name .name { font-family: var(--serif); font-size: 26px; letter-spacing: -0.01em; }
+  .logo-name .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin-top: 4px; }
+  nav.top ul { display: flex; gap: 36px; list-style: none; padding: 0; margin: 0; font-size: 14px; color: var(--ink-dim); letter-spacing: 0.01em; }
+  nav.top ul a { position: relative; padding: 4px 0; transition: color .2s; }
+  nav.top ul a:hover { color: var(--ink); }
+  nav.top ul a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -2px; height: 1px; background: var(--accent); transition: right .25s; }
+  nav.top ul a:hover::after { right: 0; }
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); padding: 10px 16px; border: 1px solid var(--accent); border-radius: 999px;
+    transition: all .2s;
+  }
+  .btn-wa:hover { background: var(--accent); color: var(--bg-deep); }
+  .btn-wa svg { width: 14px; height: 14px; }
+
+  /* ————— Hero ————— */
+  .hero { position: relative; padding: 110px 0 120px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: end; }
+  .hero h1 {
+    margin: 0; font-family: var(--serif); font-weight: 400;
+    font-size: 156px; line-height: 0.9; letter-spacing: -0.04em;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero h1 .muted { color: var(--mute); }
+  .hero-meta { display: flex; flex-direction: column; gap: 28px; padding-bottom: 24px; }
+  .hero-meta p { font-size: 17px; line-height: 1.65; color: var(--ink-dim); max-width: 440px; margin: 0; }
+  .hero-meta .sig { display: flex; align-items: center; gap: 16px; border-top: 1px solid var(--accent); padding-top: 20px; max-width: 440px; }
+  .hero-meta .sig .name { font-family: var(--serif); font-style: italic; font-size: 22px; }
+  .hero-meta .sig .role { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin-left: auto; }
+
+  .hero-image { margin-top: 88px; position: relative; }
+  .img-hero {
+    width: 100%; height: 620px; border-radius: 2px;
+    background: var(--bg-deep);
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  /* Subtle oak-grain gradient over anthracite */
+  .img-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 55%, rgba(184,138,74,.28) 0%, rgba(184,138,74,.08) 25%, rgba(20,22,24,0) 55%),
+      linear-gradient(135deg, rgba(184,138,74,.04), rgba(20,22,24,0) 60%);
+  }
+  .img-hero::after {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(234,228,214,.018) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg, rgba(234,228,214,.01) 0 1px, transparent 1px 7px);
+  }
+  .ph-label {
+    position: absolute;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(234,228,214,.55); background: rgba(20,22,24,.7); padding: 4px 10px; border: 1px solid var(--line);
+  }
+  .img-hero .caption {
+    position: absolute; bottom: 28px; left: 32px; z-index: 2;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--ink-dim);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .img-hero .caption::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+
+  /* ————— Credentials strip ————— */
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-deep); }
+  .strip .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; padding-top: 40px; padding-bottom: 40px; align-items: center; }
+  .strip .item { border-left: 1px solid var(--line); padding-left: 22px; }
+  .strip .item:first-child { border-left: none; padding-left: 0; }
+  .strip .val { font-family: var(--serif); font-size: 44px; line-height: 1; letter-spacing: -0.02em; }
+  .strip .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin-top: 10px; }
+
+  /* ————— Section framework ————— */
+  section.sec { padding: 140px 0; position: relative; }
+  section.sec + section.sec { border-top: 1px solid var(--line-soft); }
+  .sec-head { display: grid; grid-template-columns: 1fr 2.3fr; gap: 48px; margin-bottom: 72px; align-items: baseline; }
+  .sec-head .no { display: flex; flex-direction: column; gap: 8px; }
+  .sec-head .roman { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 28px; }
+  .sec-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 96px; line-height: 0.98; letter-spacing: -0.035em; }
+  .sec-head h2 em { font-style: italic; color: var(--accent); }
+  .sec-head h2 .muted { color: var(--mute); }
+  .sec-sub { max-width: 520px; font-size: 16px; line-height: 1.7; color: var(--ink-dim); margin-top: 24px; }
+
+  /* ————— Tradition (history timeline) ————— */
+  .tradition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start; }
+  .tradition .lede { font-family: var(--serif); font-size: 26px; line-height: 1.45; color: var(--ink); letter-spacing: -0.005em; max-width: 520px; }
+  .tradition .lede em { font-style: italic; color: var(--accent); }
+  .tradition ol.timeline { list-style: none; margin: 48px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .tradition ol.timeline li { display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .tradition .year { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--accent); letter-spacing: -0.01em; }
+  .tradition .event { font-size: 15px; line-height: 1.55; color: var(--ink-dim); }
+  .tradition .event strong { color: var(--ink); font-weight: 500; }
+  .tradition-visual {
+    aspect-ratio: 3/4; border: 1px solid var(--line); position: relative;
+    background:
+      radial-gradient(ellipse at 55% 40%, rgba(184,138,74,.25) 0%, rgba(184,138,74,.08) 28%, rgba(20,22,24,1) 70%),
+      var(--bg-deep);
+  }
+  .tradition-visual::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(234,228,214,.016) 0 1px, transparent 1px 4px);
+  }
+
+  /* ————— Handwerk (3-col values) ————— */
+  .hand { background: var(--bg-deep); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .hand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); margin-top: 32px; border: 1px solid var(--line); }
+  .hand-card { background: var(--bg); padding: 56px 44px; min-height: 400px; display: flex; flex-direction: column; justify-content: space-between; }
+  .hand-card .n { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--accent); }
+  .hand-card h3 { margin: 24px 0 16px; font-family: var(--serif); font-weight: 400; font-size: 40px; line-height: 1.05; letter-spacing: -0.015em; }
+  .hand-card p { font-size: 15px; line-height: 1.7; color: var(--ink-dim); margin: 0; }
+  .hand-card .foot { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line-soft); font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); }
+
+  /* ————— Wochenmärkte ————— */
+  .markets .markets-list { border-top: 1px solid var(--line); }
+  .market {
+    display: grid; grid-template-columns: 80px 1.3fr 1.8fr 1.2fr; gap: 32px; align-items: center;
+    padding: 32px 0; border-bottom: 1px solid var(--line);
+    transition: padding-left .25s, background .25s;
+  }
+  .market:hover { padding-left: 12px; background: linear-gradient(to right, rgba(184,138,74,.04), transparent 40%); }
+  .market .idx { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); }
+  .market .place { font-family: var(--serif); font-size: 36px; letter-spacing: -0.015em; }
+  .market .place em { font-style: italic; color: var(--accent); }
+  .market .desc { font-size: 14px; color: var(--ink-dim); line-height: 1.55; }
+  .market .when { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); text-align: right; }
+  .market .when .time { color: var(--mute); display: block; margin-top: 6px; letter-spacing: 0.1em; }
+
+  /* ————— Wurstbox (24h automat feature) ————— */
+  .wurstbox { background: var(--bg-deep); padding: 160px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .wurstbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .wurstbox .visual {
+    aspect-ratio: 4/5; border: 1px solid var(--line); position: relative;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(184,138,74,.25) 0%, rgba(20,22,24,1) 70%),
+      var(--bg);
+  }
+  .wurstbox .visual::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(234,228,214,.014) 0 1px, transparent 1px 4px);
+  }
+  .wurstbox .clock {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: var(--serif); font-size: 140px; line-height: 1; color: var(--accent); letter-spacing: -0.05em; font-style: italic;
+    text-shadow: 0 2px 40px rgba(184,138,74,.3);
+    z-index: 2;
+  }
+  .wurstbox .clock small { font-size: 40px; display: block; text-align: center; margin-top: 8px; color: var(--ink-dim); font-style: normal; letter-spacing: 0.1em; }
+  .wurstbox h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 88px; line-height: 0.98; letter-spacing: -0.035em; }
+  .wurstbox h3 em { font-style: italic; color: var(--accent); }
+  .wurstbox p { font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin: 32px 0 0; max-width: 500px; }
+  .wurstbox .facts { display: grid; gap: 14px; margin-top: 40px; max-width: 500px; }
+  .wurstbox .fact { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
+  .wurstbox .fact .k { color: var(--mute); font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .wurstbox .fact .v { color: var(--ink); font-family: var(--serif); font-style: italic; font-size: 20px; }
+
+  /* ————— Bratwurst (prize) ————— */
+  .prize { padding: 160px 0; background: linear-gradient(to bottom, var(--bg), var(--bg-deep)); }
+  .prize-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 96px; align-items: center; }
+  .prize .medal {
+    width: 280px; height: 280px; border-radius: 50%;
+    border: 2px solid var(--accent);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 30% 30%, rgba(217,176,122,.18), rgba(20,22,24,0) 70%);
+    color: var(--accent); font-family: var(--serif); font-style: italic;
+    position: relative;
+  }
+  .prize .medal::before, .prize .medal::after {
+    content: ""; position: absolute; width: 60px; height: 60px;
+    border: 1px solid var(--accent); border-radius: 50%; opacity: .3;
+  }
+  .prize .medal::before { top: -10px; left: -10px; }
+  .prize .medal::after { bottom: -10px; right: -10px; }
+  .prize .medal .s { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; font-style: normal; color: var(--ink-dim); }
+  .prize .medal .big { font-size: 68px; line-height: 0.9; margin: 8px 0; letter-spacing: -0.02em; }
+  .prize .medal .cap { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); font-style: normal; margin-top: 4px; }
+  .prize h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 104px; line-height: 0.95; letter-spacing: -0.04em; }
+  .prize h3 em { font-style: italic; color: var(--accent); }
+  .prize p { font-family: var(--serif); font-size: 24px; line-height: 1.45; color: var(--ink); margin-top: 40px; max-width: 560px; letter-spacing: -0.005em; }
+  .prize .sub { font-family: var(--sans); font-size: 15px; color: var(--ink-dim); margin-top: 28px; line-height: 1.7; max-width: 520px; }
+
+  /* ————— Bewertungen ————— */
+  .voices { padding: 160px 0; background: var(--bg-deep); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .voices .stars { display: flex; gap: 4px; margin-bottom: 16px; }
+  .voices .stars span { color: var(--accent); font-size: 14px; }
+  .voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 32px; }
+  .voice blockquote {
+    margin: 0; font-family: var(--serif); font-size: 26px; line-height: 1.35; color: var(--ink);
+    letter-spacing: -0.005em; position: relative;
+  }
+  .voice blockquote::before {
+    content: "„"; position: absolute; left: -8px; top: -28px;
+    font-size: 100px; color: var(--accent); opacity: .3; line-height: 1;
+  }
+  .voice .attr { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; }
+  .voice .who { font-family: var(--serif); font-style: italic; font-size: 18px; }
+  .voice .where { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); }
+  .voices .google {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-dim);
+    margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line);
+  }
+  .voices .google .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  /* ————— Kontakt / CTA ————— */
+  .cta { padding: 160px 0; background: var(--accent); color: #1a1208; position: relative; overflow: hidden; }
+  .cta::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(0,0,0,.04) 0 1px, transparent 1px 12px);
+    pointer-events: none;
+  }
+  .cta-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 96px; align-items: end; position: relative; }
+  .cta h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 172px; line-height: 0.88; letter-spacing: -0.04em; }
+  .cta h2 em { font-style: italic; }
+  .cta .channels { display: grid; gap: 0; }
+  .cta .channel { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 0; border-top: 1px solid rgba(26,18,8,.25); }
+  .cta .channel:last-child { border-bottom: 1px solid rgba(26,18,8,.25); }
+  .cta .channel .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: .7; }
+  .cta .channel .v { font-family: var(--serif); font-size: 26px; letter-spacing: -0.015em; }
+  .cta .channel .v.it { font-style: italic; }
+  .cta .wa-button {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-top: 36px; padding: 18px 28px;
+    background: #1a1208; color: var(--accent-soft);
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+    transition: all .2s;
+  }
+  .cta .wa-button:hover { background: #000; color: #fff; }
+  .cta .wa-button svg { width: 18px; height: 18px; }
+
+  /* ————— Floating WhatsApp ————— */
+  .fab-wa {
+    position: fixed; bottom: 28px; right: 28px; z-index: 40;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #25D366; color: white;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 30px rgba(37,211,102,.35), 0 2px 8px rgba(0,0,0,.4);
+    transition: transform .2s;
+  }
+  .fab-wa:hover { transform: scale(1.08); }
+  .fab-wa svg { width: 28px; height: 28px; }
+  .fab-wa .tip {
+    position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+    background: var(--bg-deep); color: var(--ink); padding: 10px 16px; border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap;
+    opacity: 0; transition: opacity .2s; pointer-events: none;
+  }
+  .fab-wa:hover .tip { opacity: 1; }
+
+  /* ————— Footer ————— */
+  footer { background: var(--bg-deep); padding: 80px 0 32px; border-top: 1px solid var(--line); }
+  footer .top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--line-soft); }
+  footer .brand { font-family: var(--serif); font-size: 40px; letter-spacing: -0.02em; }
+  footer .brand-sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin-top: 12px; }
+  footer .brand-about { font-size: 14px; line-height: 1.65; color: var(--ink-dim); margin-top: 20px; max-width: 380px; }
+  footer .col .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin-bottom: 20px; }
+  footer .col ul { list-style: none; padding: 0; margin: 0; }
+  footer .col li { font-size: 14px; color: var(--ink-dim); padding: 5px 0; }
+  footer .col li.strong { color: var(--ink); }
+  footer .col a:hover { color: var(--accent); }
+  footer .bot { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); }
+  footer .bot .ext { display: flex; gap: 28px; }
+  footer .bot a:hover { color: var(--accent); }
+
+  /* ————— Tweaks panel ————— */
+  #tweaks { position: fixed; right: 20px; bottom: 100px; width: 280px; background: rgba(35,37,40,.92); backdrop-filter: blur(16px); border: 1px solid var(--line); border-radius: 8px; padding: 16px; font-family: var(--sans); color: var(--ink); z-index: 50; display: none; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  #tweaks h4 { margin: 0 0 14px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+  #tweaks .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line-soft); }
+  #tweaks .row:first-of-type { border-top: none; }
+  #tweaks label { font-size: 12px; color: var(--ink-dim); letter-spacing: 0.02em; }
+  #tweaks .swatches { display: flex; gap: 6px; }
+  #tweaks .sw { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); cursor: pointer; transition: transform .15s; }
+  #tweaks .sw:hover { transform: scale(1.1); }
+  #tweaks .sw.active { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--ink); }
+  #tweaks select { background: var(--bg-deep); color: var(--ink); border: 1px solid var(--line); border-radius: 4px; padding: 4px 6px; font-family: var(--mono); font-size: 11px; }
+
+  body.compact section.sec { padding: 96px 0; }
+  body.compact .hero { padding: 72px 0 80px; }
+  body.compact .wurstbox, body.compact .prize, body.compact .voices, body.compact .cta { padding: 96px 0; }
+  body.compact .sec-head { margin-bottom: 48px; }
+  body.compact .hero h1 { font-size: 120px; }
+  body.compact .sec-head h2 { font-size: 72px; }
+
+  @media (max-width: 1100px) {
+    .wrap { padding: 0 32px; }
+    .hero-grid, .tradition-grid, .wurstbox-grid, .prize-grid, .cta-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero h1 { font-size: 88px; }
+    .sec-head { grid-template-columns: 1fr; gap: 24px; }
+    .sec-head h2 { font-size: 64px; }
+    .hand-grid { grid-template-columns: 1fr; }
+    .market { grid-template-columns: 60px 1fr 1fr; }
+    .market .when { grid-column: 1 / -1; text-align: left; }
+    .voices-grid { grid-template-columns: 1fr; }
+    .cta h2 { font-size: 96px; }
+    footer .top { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement bar -->
+<div class="announce">
+  <div class="wrap">
+    <div class="left">
+      <span class="pulse">Europas beste Bratwurst — Goldmedaille</span>
+      <span>Wurstbox · 24 h geöffnet</span>
+    </div>
+    <div class="right">Laden: Mo–Mi 07:00–14:00 · Do–Fr 06:30–16:00 · Sa 07:00–13:00</div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="top">
+  <div class="wrap">
+    <a href="#" class="logo">
+      <img src="data:image/png;base64,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" alt="Meister Grämmel" class="logo-img" />
+      <span class="logo-name">
+        <span class="name">Meister Grämmel</span>
+        <span class="tag">Fleischereifachgeschäft · seit 1902</span>
+      </span>
+    </a>
+    <ul>
+      <li><a href="#tradition">Tradition</a></li>
+      <li><a href="#handwerk">Handwerk</a></li>
+      <li><a href="#markt">Wochenmärkte</a></li>
+      <li><a href="#wurstbox">Wurstbox</a></li>
+      <li><a href="karriere.html">Karriere</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="#" id="nav-wa" class="btn-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 40px;">— Est. MCMII · Detmold · Dritte Generation —</div>
+        <h1>
+          Drei<br>
+          Generationen.<br>
+          <em>Ein Handwerk.</em>
+        </h1>
+      </div>
+      <div class="hero-meta">
+        <p>Fleischerei im Familienbesitz seit 1902. Seit über fünf Jahrzehnten auf den Wochenmärkten in Detmold, Horn und Lage — und heute von Andreas und Alexandra Grämmel in dritter Generation geführt.</p>
+        <div class="sig">
+          <span class="name">Familie Grämmel</span>
+          <span class="role">Lagesche Str. 28 · Detmold</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <div class="img-hero">
+        <span class="ph-label" style="top: 20px; left: 20px;">BILD · Theke / Werkstatt — ersetzen</span>
+        <div class="caption">Eigene Herstellung · Bild folgt</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Credentials strip -->
+<div class="strip">
+  <div class="wrap">
+    <div class="item"><div class="val">1902</div><div class="lbl">Familiengründung · Schlesien</div></div>
+    <div class="item"><div class="val">III.</div><div class="lbl">Generation in Detmold</div></div>
+    <div class="item"><div class="val">120</div><div class="lbl">Wurstsorten · eigene Herstellung</div></div>
+    <div class="item"><div class="val">01</div><div class="lbl">Europas beste Bratwurst</div></div>
+  </div>
+</div>
+
+<!-- Tradition -->
+<section class="sec tradition" id="tradition">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">
+        <span class="eyebrow">§ I — Tradition</span>
+        <span class="roman">i.</span>
+      </div>
+      <div>
+        <h2>Ein Handwerk,<br><em>das bleibt.</em></h2>
+        <p class="sec-sub">Was 1902 in Schlesien begann, führen wir heute in Detmold weiter — mit denselben Werten: eigene Rezepte, eigenes Räuchern, und morgens um halb drei in der Wurstküche stehen.</p>
+      </div>
+    </div>
+
+    <div class="tradition-grid">
+      <div>
+        <p class="lede">Drei Generationen, zwei Länder, ein Betrieb. Vom schlesischen Familienbetrieb über den Neuanfang in Lippe bis zur heutigen <em>Fleischerei an der Lageschen Straße</em> — unsere Geschichte steckt in jeder Wurst.</p>
+      </div>
+      <div>
+        <div class="tradition-visual">
+          <span class="ph-label" style="bottom: 20px; left: 20px;">BILD · Historisch — folgt</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Handwerk -->
+<section class="sec hand" id="handwerk">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">
+        <span class="eyebrow">§ II — Handwerk</span>
+        <span class="roman">ii.</span>
+      </div>
+      <div>
+        <h2>Alles aus einem<br><em>Haus.</em></h2>
+        <p class="sec-sub">Eigene Wurstküche. Eigene Räucherei. Eigene Rezepte. Wir zerlegen, reifen, würzen und räuchern hier — nicht dort, nicht irgendwo. An der Lageschen Straße.</p>
+      </div>
+    </div>
+
+    <div class="hand-grid">
+      <div class="hand-card">
+        <div class="n">i.</div>
+        <div>
+          <h3>Eigene<br>Herstellung</h3>
+          <p>Jede Wurst, jede Pastete, jeder Schinken entsteht im eigenen Betrieb in Detmold. 120 Sorten, eigene Rezepturen — viele davon seit Jahrzehnten unverändert.</p>
+        </div>
+        <div class="foot">— Wurstküche · Räucherei —</div>
+      </div>
+      <div class="hand-card">
+        <div class="n">ii.</div>
+        <div>
+          <h3>Meister­betrieb</h3>
+          <p>Eingetragener Meisterbetrieb der Handwerkskammer Ostwestfalen-Lippe. Goldener Meisterbrief 2016. Ausgezeichnet mit Europas bester Bratwurst — in Gold.</p>
+        </div>
+        <div class="foot">— Handwerkskammer OWL —</div>
+      </div>
+      <div class="hand-card">
+        <div class="n">iii.</div>
+        <div>
+          <h3>Markt<br>seit 1970</h3>
+          <p>Über fünfzig Jahre auf den Wochenmärkten der Region präsent. Dienstag, Donnerstag, Samstag Detmold. Mittwoch Horn. Freitag Lage. Wie immer.</p>
+        </div>
+        <div class="foot">— Detmold · Horn · Lage —</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wochenmärkte -->
+<section class="sec markets" id="markt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">
+        <span class="eyebrow">§ III — Wochenmärkte</span>
+        <span class="roman">iii.</span>
+      </div>
+      <div>
+        <h2>Da, wo<br><em>Sie sind.</em></h2>
+        <p class="sec-sub">An fünf Tagen die Woche sind wir mit dem Marktwagen unterwegs. Morgens um halb drei beginnt der Tag, gegen halb fünf steht der Wagen auf dem Platz.</p>
+      </div>
+    </div>
+
+    <div class="markets-list">
+      <div class="market">
+        <div class="idx">№ 01</div>
+        <div class="place"><em>Detmold</em> · Marktplatz</div>
+        <div class="desc">Der Stammmarkt. Dreimal die Woche. Hier begann vor über fünfzig Jahren alles.</div>
+        <div class="when">Di · Do · Sa<span class="time">07:00–13:00</span></div>
+      </div>
+      <div class="market">
+        <div class="idx">№ 02</div>
+        <div class="place"><em>Horn</em></div>
+        <div class="desc">Mittwochs in Horn — seit Generationen Teil unseres festen Markt­rhythmus.</div>
+        <div class="when">Mittwoch<span class="time">06:00–13:30</span></div>
+      </div>
+      <div class="market">
+        <div class="idx">№ 03</div>
+        <div class="place"><em>Lage</em></div>
+        <div class="desc">Freitags in Lage. Der letzte Markt der Woche, bevor es samstags ins Ladengeschäft geht.</div>
+        <div class="when">Freitag<span class="time">06:00–13:30</span></div>
+      </div>
+      <div class="market">
+        <div class="idx">№ 04</div>
+        <div class="place">Lagesche Str. 28 · <em>Ladengeschäft</em></div>
+        <div class="desc">Angegliedert an den Herstellungsbetrieb. Frisch aus der Wurstküche — oft noch rauchwarm.</div>
+        <div class="when">Mo–Sa<span class="time">Siehe Öffnungszeiten</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wurstbox -->
+<section class="wurstbox" id="wurstbox">
+  <div class="wrap">
+    <div class="wurstbox-grid">
+      <div class="visual">
+        <div class="clock">24<small>STUNDEN</small></div>
+        <span class="ph-label" style="bottom: 20px; left: 20px;">BILD · Automat — folgt</span>
+      </div>
+      <div>
+        <span class="eyebrow">§ IV — Wurstbox</span>
+        <h3 style="margin-top: 20px;">Auch wenn<br>der Laden <em>zu</em>&nbsp;ist.</h3>
+        <p>Unser 24-Stunden-Spezialitäten-Automat hält das Wichtigste bereit, wenn die Ladentür geschlossen ist. Grillfleisch, Bratwurst, Salate — in lippischer Meisterqualität.</p>
+
+        <div class="facts">
+          <div class="fact"><span class="k">Standort</span><span class="v">Lagesche Str. 28</span></div>
+          <div class="fact"><span class="k">Geöffnet</span><span class="v">24 / 7 / 365</span></div>
+          <div class="fact"><span class="k">Zahlung</span><span class="v">bar &amp; Karte</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Preis / Europas beste Bratwurst -->
+<section class="prize">
+  <div class="wrap">
+    <div class="prize-grid">
+      <div>
+        <span class="eyebrow">§ V — Auszeichnung</span>
+        <h3 style="margin-top: 20px;">Europas beste<br><em>Bratwurst.</em></h3>
+        <p>Die Detmolder Pokal Bratwurst — eine eigene Rezeptur aus dem Hause Grämmel — trägt den europäischen Titel. Gold. Für ein Handwerk, das nicht lauter, sondern leiser wird, je länger man es betreibt.</p>
+        <div class="sub">Auch unsere Käse-Chili-Bratwurst ist ausgezeichnet. Beide werden in der hauseigenen Wurstküche frisch gestopft — an der Lageschen Straße in Detmold.</div>
+      </div>
+      <div style="display:flex; justify-content:center;">
+        <div class="medal">
+          <div class="s">— Europameister —</div>
+          <div class="big">Gold</div>
+          <div class="cap">Bratwurst · Grämmel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bewertungen -->
+<section class="voices">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">
+        <span class="eyebrow">§ VI — Stimmen</span>
+        <span class="roman">vi.</span>
+      </div>
+      <div>
+        <h2>Was die <em>Kundschaft</em><br>so sagt.</h2>
+        <p class="sec-sub">Auszug aus echten Kundenrezensionen zu Grämmel GmbH &amp; Co. KG, Lagesche Straße 28, Detmold.</p>
+      </div>
+    </div>
+
+    <div class="voices-grid">
+      <div class="voice">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>Wir haben heute Nackensteaks von Grämmel gegessen und waren begeistert! Das Fleisch war auf Holzkohle gegrillt richtig saftig und zart, obwohl die Stücke ziemlich dick waren. Die Qualität überzeugt.</blockquote>
+        <div class="attr"><span class="who">Kundin aus Detmold</span><span class="where">Google · 5 von 5</span></div>
+      </div>
+      <div class="voice">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>Meine Großmutter hat schon in Schlesien bei der Familie der Grämmels Well- und Knoblauchwurst gekauft, auch die leckere Kümmelwurst und Krakauer. Wir haben uns sehr gefreut, als wir vor einigen Jahren entdeckten, dass wir UNSEREN Fleischer wiedergefunden haben.</blockquote>
+        <div class="attr"><span class="who">Treue Kundin</span><span class="where">Google · 5 von 5</span></div>
+      </div>
+      <div class="voice">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>Ich persönlich freue mich immer wieder auf den Besuch bei den Grämmels und einen kleinen Plausch. So ist der Gefrierschrank immer gut gefüllt mit alten vertrauten und neueren Spezialitäten.</blockquote>
+        <div class="attr"><span class="who">Stammkundschaft</span><span class="where">Google · 5 von 5</span></div>
+      </div>
+    </div>
+
+    <div class="google">
+      <span class="dot"></span>
+      <span>Originalrezensionen · Google Business Profile</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / Kontakt -->
+<section class="cta" id="kontakt">
+  <div class="wrap">
+    <div class="cta-grid">
+      <h2>Sprechen<br>Sie <em>uns&nbsp;an.</em></h2>
+      <div>
+        <div class="channels">
+          <div class="channel"><span class="k">Anruf</span><span class="v">05231 · 25772</span></div>
+          <div class="channel"><span class="k">Fax</span><span class="v">05231 · 300326</span></div>
+          <div class="channel"><span class="k">E-Mail</span><span class="v it">info@graemmel.de</span></div>
+          <div class="channel"><span class="k">Laden</span><span class="v">Lagesche Str. 28</span></div>
+          <div class="channel"><span class="k">Ort</span><span class="v">32756 Detmold</span></div>
+        </div>
+        <a href="#" id="cta-wa" class="wa-button">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Direkt via WhatsApp schreiben
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <img src="data:image/png;base64,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" alt="Meister Grämmel" style="width:100px;height:100px;border-radius:50%;margin-bottom:20px;" />
+        <div class="brand">Meister Grämmel</div>
+        <div class="brand-sub">— Fleischereifachgeschäft seit 1902 —</div>
+        <div class="brand-about">Grämmel GmbH &amp; Co. KG · Fleischerei mit eigener Herstellung an der Lageschen Straße in Detmold. Dritte Generation · Mitglied der Fleischer-Innung · Goldener Meisterbrief.</div>
+      </div>
+      <div class="col">
+        <div class="lbl">— Haus —</div>
+        <ul>
+          <li><a href="#tradition">Tradition</a></li>
+          <li><a href="#handwerk">Handwerk</a></li>
+          <li><a href="#markt">Wochenmärkte</a></li>
+          <li><a href="#wurstbox">Wurstbox 24h</a></li>
+          <li><a href="karriere.html">Karriere</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="lbl">— Ladengeschäft —</div>
+        <ul>
+          <li class="strong">Mo–Mi 07:00–14:00</li>
+          <li class="strong">Do–Fr 06:30–16:00</li>
+          <li class="strong">Sa 07:00–13:00</li>
+          <li>So geschlossen</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="lbl">— Finden —</div>
+        <ul>
+          <li>Lagesche Str. 28</li>
+          <li>32756 Detmold</li>
+          <li>05231 25772</li>
+          <li style="margin-top:14px"><a style="color:var(--accent)" href="mailto:info@graemmel.de">info@graemmel.de</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bot">
+      <div>© MMXXVI · Grämmel GmbH &amp; Co. KG</div>
+      <div class="ext"><a>Impressum</a><a>Datenschutz</a><a>AGB</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="#" id="fab-wa" class="fab-wa" aria-label="WhatsApp">
+  <span class="tip">Direkt schreiben</span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+(function(){
+  const WA_NUMBER = '4915164417041';
+  const WA_URL = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Hallo Herr Grämmel, ');
+  document.querySelectorAll('#nav-wa, #fab-wa, #cta-wa').forEach(a => {
+    a.href = WA_URL;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+  // Smooth in-page scrolling
+  document.querySelectorAll('nav.top a[href^="#"], footer a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (href === '#' || !href.startsWith('#')) return;
+      const id = href.slice(1);
+      const el = document.getElementById(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
