@@ -57,6 +57,15 @@
   .btn-wa:hover { background: var(--oak); color: var(--ink-deep); }
   .btn-wa svg { width: 13px; height: 13px; }
 
+  /* Mobile nav toggle */
+  .nav-toggle { display: none; width: 44px; height: 44px; background: transparent; border: 1px solid var(--line); border-radius: 50%; cursor: pointer; padding: 0; align-items: center; justify-content: center; flex-direction: column; gap: 4px; position: relative; z-index: 52; }
+  .nav-toggle span { width: 18px; height: 1.5px; background: var(--oak); transition: transform .25s, opacity .25s; display: block; }
+  body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+  .nav-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 38; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  body.menu-open .nav-backdrop { opacity: 1; pointer-events: auto; }
+
   /* Job Hero */
   .job-hero { position: relative; padding: 110px 0 80px; overflow: hidden; background: var(--ink); }
   .job-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 700px 500px at 80% 30%, rgba(107,31,31,.10), transparent 60%); }
@@ -176,7 +185,26 @@
   @media (max-width: 1100px) {
     .wrap { padding: 0 28px; }
     .announce .wrap, nav.top .wrap { padding-left: 28px; padding-right: 28px; }
-    nav.top ul { display: none; }
+    nav.top { background: var(--ink-deep); backdrop-filter: none; -webkit-backdrop-filter: none; }
+    nav.top .wrap { padding: 14px 28px; }
+    .logo-name .tag { display: none; }
+    .btn-wa { padding: 9px 14px; font-size: 9px; }
+    .nav-toggle { display: flex; }
+    nav.top ul {
+      display: flex; flex-direction: column; gap: 0;
+      position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 380px;
+      background: var(--ink-deep); padding: 100px 32px 40px;
+      transform: translateX(100%); transition: transform .35s cubic-bezier(.2,.8,.2,1);
+      z-index: 50; border-left: 1px solid var(--line); overflow-y: auto;
+      box-shadow: -30px 0 60px rgba(0,0,0,.5);
+    }
+    body.menu-open nav.top ul { transform: none; }
+    body.menu-open { overflow: hidden; }
+    nav.top ul li { border-bottom: 1px solid var(--line-soft); }
+    nav.top ul a { font-family: var(--fraunces); font-weight: 340; font-size: 30px; padding: 20px 0; display: block; color: #eae4d6; letter-spacing: -0.01em; }
+    nav.top ul a::after { display: none; }
+    nav.top ul a:hover, nav.top ul a.active { color: var(--oak); }
+
     .job-hero { padding: 60px 0 48px; }
     .job-hero .hero-inner { grid-template-columns: 1fr; gap: 48px; }
     .hiring-stamp svg { width: 200px; height: 200px; }
@@ -191,6 +219,75 @@
     .steps::before { display: none; }
     .cta-final .inner { grid-template-columns: 1fr; gap: 48px; }
     footer .top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    .announce .wrap, nav.top .wrap { padding-left: 20px; padding-right: 20px; }
+    .announce .wrap { flex-direction: column; gap: 4px; padding: 8px 20px; font-size: 9px; letter-spacing: 0.14em; align-items: flex-start; }
+    nav.top .wrap { padding: 12px 20px; }
+    .logo-img { width: 40px; height: 40px; }
+    .logo-name .name { font-size: 19px; }
+    .btn-wa { padding: 8px 12px; font-size: 9px; letter-spacing: 0.18em; gap: 6px; }
+    .btn-wa svg { width: 11px; height: 11px; }
+
+    .job-hero { padding: 32px 0 32px; }
+    .chips { gap: 8px; margin-bottom: 24px; }
+    .chip { font-size: 9px; padding: 6px 11px; letter-spacing: 0.18em; }
+    .job-hero h1 { font-size: 44px; letter-spacing: -0.03em; }
+    .job-hero .lede { font-size: 17px; margin-top: 28px; line-height: 1.5; }
+    .hiring-stamp { padding-top: 20px; }
+    .hiring-stamp svg { width: 160px; height: 160px; }
+
+    .facts-strip { padding: 36px 0; }
+    .facts-strip .wrap { grid-template-columns: 1fr 1fr; gap: 22px 18px; }
+    .facts-strip .item { padding-left: 14px; }
+    .facts-strip .val { font-size: 34px; }
+    .facts-strip .lbl { font-size: 9px; letter-spacing: 0.18em; margin-top: 10px; }
+
+    .job-body { padding: 64px 0 80px; }
+    .col-main h2 { font-size: 30px; letter-spacing: -0.025em; }
+    .col-main h2:not(:first-of-type) { margin-top: 56px; }
+    .col-main > p { font-size: 17px; }
+    .col-main ul.tasks li { grid-template-columns: 30px 1fr; gap: 14px; padding: 18px 0; }
+    .col-main ul.tasks .num { font-size: 20px; }
+    .col-main ul.tasks .strong { font-size: 18px; }
+    .col-main ul.tasks .small { font-size: 14px; line-height: 1.55; }
+
+    .pullquote { padding: 32px 22px; margin: 48px 0; }
+    .pullquote::before { inset: 8px; }
+    .pullquote blockquote { font-size: 20px; line-height: 1.35; }
+    .pullquote cite { font-size: 22px; margin-top: 24px; padding-top: 16px; }
+
+    .steps { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; }
+    .step { text-align: left; padding: 0; display: grid; grid-template-columns: 60px 1fr; gap: 20px; align-items: start; }
+    .step .circle { width: 56px; height: 56px; font-size: 22px; margin: 0; }
+    .step h4 { font-size: 19px; margin-top: 4px; }
+    .step p { font-size: 14.5px; }
+
+    .side-card { padding: 28px 22px 22px; }
+    .side-card::before { inset: 8px; }
+    .side-card .ttl { font-size: 24px; }
+    .side-card .badge { font-size: 8px; padding: 5px 11px; letter-spacing: 0.22em; }
+    .side-card .script-name { font-size: 24px; }
+    .btn { padding: 14px 14px; font-size: 9.5px; letter-spacing: 0.2em; }
+
+    .cta-final { padding: 80px 0; }
+    .cta-final .inner { gap: 32px; }
+    .cta-final h2 { font-size: 56px; letter-spacing: -0.03em; }
+    .cta-final .ch { flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px 0; }
+    .cta-final .ch .v { font-size: 18px; text-align: left; }
+    .cta-final .wa-button { width: 100%; justify-content: center; margin-top: 24px; padding: 16px 20px; font-size: 10px; letter-spacing: 0.2em; }
+
+    footer { padding: 40px 0 24px; }
+    footer .top { grid-template-columns: 1fr; gap: 32px; padding: 0 0 32px; }
+    footer .brand { font-size: 28px; }
+    footer .brand-about { font-size: 15px; }
+    footer .bot { flex-direction: column; gap: 16px; align-items: flex-start; }
+
+    .fab-wa { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+    .fab-wa svg { width: 22px; height: 22px; }
+    .fab-wa .tip { display: none; }
   }
 </style>
 </head>
@@ -212,7 +309,7 @@
         <span class="tag">Fleischereifachgeschäft · seit 1902</span>
       </span>
     </a>
-    <ul>
+    <ul id="nav-menu">
       <li><a href="index.html#tradition">Tradition</a></li>
       <li><a href="index.html#handwerk">Handwerk</a></li>
       <li><a href="index.html#markt">Wochenmärkte</a></li>
@@ -224,8 +321,10 @@
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
       WhatsApp
     </a>
+    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+<div class="nav-backdrop" aria-hidden="true"></div>
 
 <header class="job-hero">
   <div class="wrap">
@@ -438,6 +537,24 @@
   const WA_URL = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Hallo Herr Grämmel, ');
   document.querySelectorAll('#side-wa, #final-wa').forEach(a => { a.href = WA_URL_JOB; a.target = '_blank'; a.rel = 'noopener'; });
   document.querySelectorAll('#nav-wa, #fab-wa').forEach(a => { a.href = WA_URL; a.target = '_blank'; a.rel = 'noopener'; });
+
+  // Mobile menu toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const backdrop = document.querySelector('.nav-backdrop');
+  const closeMenu = () => {
+    document.body.classList.remove('menu-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  };
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const open = document.body.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    });
+  }
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
+  document.querySelectorAll('#nav-menu a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
