@@ -4,365 +4,356 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grämmel — Fleischermeister in Detmold seit 1902</title>
+<meta name="description" content="Fleischerei Grämmel · Meisterbetrieb in Detmold seit 1902. Dritte Generation. Europas beste Bratwurst. Wochenmärkte in Detmold, Horn und Lage." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    /* Anthrazit + Eiche */
-    --bg: #1c1e20;
-    --bg-deep: #141618;
-    --panel: #232528;
-    --surface: #20222514;
-    --ink: #eae4d6;
+    --ink-deep: #0d0d0d;
+    --ink: #16161a;
+    --ink-warm: #1f1d1a;
+    --ink-paper: #2b2a27;
+    --paper: #f1e8d4;
+    --paper-deep: #e8ddc3;
+    --paper-fleck: #d6c9a8;
+    --paper-line: rgba(26,25,24,0.18);
+    --paper-soft: rgba(26,25,24,0.08);
+    --ink-on-paper: #1a1918;
     --ink-dim: #b0a99a;
+    --ink-soft: #7b7566;
     --mute: #767062;
     --line: rgba(234,228,214,0.10);
     --line-soft: rgba(234,228,214,0.06);
-    --accent: #b88a4a;          /* Eiche */
-    --accent-deep: #8a6332;
-    --accent-soft: #d9b07a;
-
+    --oak: #b88a4a;
+    --oak-deep: #7a5a2c;
+    --oak-light: #d9b07a;
+    --wine: #6b1f1f;
+    --wine-deep: #471313;
+    --smoke: #5a4b3a;
     --serif: "Instrument Serif", Georgia, serif;
+    --fraunces: "Fraunces", "Instrument Serif", Georgia, serif;
     --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, monospace;
+    --script: "Caveat", "Instrument Serif", cursive;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-  body { overflow-x: hidden; }
+  html, body { margin: 0; padding: 0; background: var(--ink); color: #eae4d6; font-family: var(--sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-feature-settings: "liga", "dlig", "kern"; }
+  body { overflow-x: hidden; hanging-punctuation: first last; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
-  ::selection { background: var(--accent); color: #120a06; }
+  ::selection { background: var(--oak); color: #120a06; }
+  button { font-family: inherit; }
+
+  /* Grain overlay — applied to specific sections */
+  .grain { position: relative; }
+  .grain::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: .5; mix-blend-mode: overlay;
+  }
+  .grain > * { position: relative; z-index: 2; }
 
   .wrap { max-width: 1440px; margin: 0 auto; padding: 0 56px; }
-  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); }
+  .wrap-tight { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.30em; text-transform: uppercase; color: var(--oak); }
+  .eyebrow.wine { color: var(--wine); }
 
-  /* ————— Announcement bar ————— */
-  .announce {
-    border-bottom: 1px solid var(--line);
-    background: var(--bg-deep);
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-dim);
-  }
-  .announce .wrap { display: flex; justify-content: space-between; padding-top: 10px; padding-bottom: 10px; }
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ————— Announcement ————— */
+  .announce { border-bottom: 1px solid var(--line); background: var(--ink-deep); font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-dim); }
+  .announce .wrap { display: flex; justify-content: space-between; padding: 11px 56px; gap: 32px; }
   .announce .left { display: flex; gap: 28px; flex-wrap: wrap; }
-  .announce .pulse { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); }
+  .announce .pulse { display: inline-flex; align-items: center; gap: 8px; color: #eae4d6; }
   .pulse::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #a8c080; box-shadow: 0 0 0 0 rgba(168,192,128,.6); animation: pulse 1.8s infinite; }
   @keyframes pulse { 70% { box-shadow: 0 0 0 7px rgba(168,192,128,0); } 100% { box-shadow: 0 0 0 0 rgba(168,192,128,0); } }
 
   /* ————— Nav ————— */
-  nav.top { position: sticky; top: 0; z-index: 20; background: rgba(28,30,32,.82); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  nav.top { position: sticky; top: 0; z-index: 40; background: rgba(22,22,26,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; }
   .logo { display: flex; align-items: center; gap: 14px; }
-  .logo-img { width: 52px; height: 52px; border-radius: 50%; display: block; }
+  .logo-img { width: 48px; height: 48px; border-radius: 50%; display: block; }
   .logo-name { line-height: 1; }
-  .logo-name .name { font-family: var(--serif); font-size: 26px; letter-spacing: -0.01em; }
-  .logo-name .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin-top: 4px; }
-  nav.top ul { display: flex; gap: 36px; list-style: none; padding: 0; margin: 0; font-size: 14px; color: var(--ink-dim); letter-spacing: 0.01em; }
-  nav.top ul a { position: relative; padding: 4px 0; transition: color .2s; }
-  nav.top ul a:hover { color: var(--ink); }
-  nav.top ul a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -2px; height: 1px; background: var(--accent); transition: right .25s; }
+  .logo-name .name { font-family: var(--fraunces); font-weight: 400; font-size: 24px; letter-spacing: -0.01em; font-variation-settings: "opsz" 72; }
+  .logo-name .tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin-top: 5px; }
+  nav.top ul { display: flex; gap: 34px; list-style: none; padding: 0; margin: 0; font-size: 13px; color: var(--ink-dim); letter-spacing: 0.02em; font-weight: 400; }
+  nav.top ul a { position: relative; padding: 6px 0; transition: color .2s; }
+  nav.top ul a:hover { color: #eae4d6; }
+  nav.top ul a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--oak); transition: right .3s cubic-bezier(.2,.8,.2,1); }
   nav.top ul a:hover::after { right: 0; }
-  .btn-wa {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--accent); padding: 10px 16px; border: 1px solid var(--accent); border-radius: 999px;
-    transition: all .2s;
-  }
-  .btn-wa:hover { background: var(--accent); color: var(--bg-deep); }
-  .btn-wa svg { width: 14px; height: 14px; }
+  .btn-wa { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--oak); padding: 10px 16px; border: 1px solid var(--oak); border-radius: 999px; transition: all .25s; }
+  .btn-wa:hover { background: var(--oak); color: var(--ink-deep); }
+  .btn-wa svg { width: 13px; height: 13px; }
 
   /* ————— Hero ————— */
-  .hero { position: relative; padding: 110px 0 120px; overflow: hidden; }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: end; }
-  .hero h1 {
-    margin: 0; font-family: var(--serif); font-weight: 400;
-    font-size: 156px; line-height: 0.9; letter-spacing: -0.04em;
-  }
-  .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero h1 .muted { color: var(--mute); }
-  .hero-meta { display: flex; flex-direction: column; gap: 28px; padding-bottom: 24px; }
-  .hero-meta p { font-size: 17px; line-height: 1.65; color: var(--ink-dim); max-width: 440px; margin: 0; }
-  .hero-meta .sig { display: flex; align-items: center; gap: 16px; border-top: 1px solid var(--accent); padding-top: 20px; max-width: 440px; }
-  .hero-meta .sig .name { font-family: var(--serif); font-style: italic; font-size: 22px; }
-  .hero-meta .sig .role { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin-left: auto; }
-
-  .hero-image { margin-top: 88px; position: relative; }
-  .img-hero {
-    width: 100%; height: 620px; border-radius: 2px;
-    background: var(--bg-deep);
-    position: relative; overflow: hidden;
-    border: 1px solid var(--line);
-  }
-  /* Subtle oak-grain gradient over anthracite */
-  .img-hero::before {
-    content: ""; position: absolute; inset: 0;
+  .hero { position: relative; padding: 100px 0 40px; overflow: hidden; background: var(--ink); }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
     background:
-      radial-gradient(ellipse at 30% 55%, rgba(184,138,74,.28) 0%, rgba(184,138,74,.08) 25%, rgba(20,22,24,0) 55%),
-      linear-gradient(135deg, rgba(184,138,74,.04), rgba(20,22,24,0) 60%);
+      radial-gradient(ellipse 900px 600px at 85% 20%, rgba(184,138,74,.10), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 10% 90%, rgba(107,31,31,.06), transparent 60%);
   }
-  .img-hero::after {
-    content: ""; position: absolute; inset: 0;
-    background-image:
-      repeating-linear-gradient(90deg, rgba(234,228,214,.018) 0 1px, transparent 1px 3px),
-      repeating-linear-gradient(0deg, rgba(234,228,214,.01) 0 1px, transparent 1px 7px);
-  }
-  .ph-label {
-    position: absolute;
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(234,228,214,.55); background: rgba(20,22,24,.7); padding: 4px 10px; border: 1px solid var(--line);
-  }
-  .img-hero .caption {
-    position: absolute; bottom: 28px; left: 32px; z-index: 2;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--ink-dim);
-    display: flex; align-items: center; gap: 12px;
-  }
-  .img-hero .caption::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+  .hero-grid { position: relative; display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: center; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 18px; margin-bottom: 44px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-dim); }
+  .hero-eyebrow::before, .hero-eyebrow::after { content: ""; height: 1px; background: var(--oak); flex: 0 0 40px; }
+  .hero-eyebrow::after { flex: 1; }
+  .hero h1 { margin: 0; font-family: var(--fraunces); font-weight: 340; font-size: clamp(64px, 8.4vw, 128px); line-height: 0.94; letter-spacing: -0.028em; font-variation-settings: "opsz" 120, "SOFT" 20; }
+  .hero h1 em { font-style: italic; color: var(--oak); font-weight: 380; font-variation-settings: "opsz" 144, "SOFT" 50; }
+  .hero h1 .alt { display: inline-block; color: #cfc8b7; }
+  .hero-prose { margin-top: 44px; max-width: 520px; font-family: var(--fraunces); font-weight: 340; font-size: 20px; line-height: 1.55; color: #cfc8b7; font-variation-settings: "opsz" 18; letter-spacing: 0.005em; }
+  .hero-prose em { font-style: italic; color: var(--oak-light); }
+  .hero-sig { margin-top: 36px; display: flex; align-items: center; gap: 18px; max-width: 480px; }
+  .hero-sig .rule { height: 1px; background: var(--oak); flex: 0 0 36px; }
+  .hero-sig .script { font-family: var(--script); font-size: 32px; color: var(--oak-light); transform: rotate(-4deg); padding-bottom: 4px; }
+  .hero-sig .note { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin-left: auto; text-align: right; line-height: 1.7; }
 
-  /* ————— Credentials strip ————— */
-  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-deep); }
-  .strip .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; padding-top: 40px; padding-bottom: 40px; align-items: center; }
-  .strip .item { border-left: 1px solid var(--line); padding-left: 22px; }
-  .strip .item:first-child { border-left: none; padding-left: 0; }
-  .strip .val { font-family: var(--serif); font-size: 44px; line-height: 1; letter-spacing: -0.02em; }
-  .strip .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin-top: 10px; }
+  /* Seal */
+  .seal-wrap { position: relative; display: flex; justify-content: center; align-items: center; min-height: 500px; }
+  .seal { position: relative; width: 420px; height: 420px; }
+  .seal .ring { width: 100%; height: 100%; animation: spin 80s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .seal .core { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--oak-light); }
+  .seal .core .stars { font-size: 14px; letter-spacing: 0.4em; color: var(--oak); }
+  .seal .core .yr { font-family: var(--fraunces); font-style: italic; font-size: 108px; line-height: 1; color: var(--oak); font-variation-settings: "opsz" 144; letter-spacing: -0.03em; margin: 4px 0 2px; }
+  .seal .core .d { width: 46px; height: 1px; background: var(--oak); margin: 10px 0; }
+  .seal .core .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--oak-light); }
+  .seal .core .cap { font-family: var(--mono); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-dim); margin-top: 10px; }
+  .seal-floor { position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); display: flex; gap: 14px; align-items: center; font-family: var(--mono); font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--mute); }
+  .seal-floor svg { width: 22px; height: 22px; color: var(--oak); }
 
-  /* ————— Section framework ————— */
+  /* Marquee ticker */
+  .marquee { position: relative; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(to right, var(--ink-deep), var(--ink-warm), var(--ink-deep)); overflow: hidden; margin-top: 80px; }
+  .marquee-track { display: flex; gap: 64px; padding: 22px 0; white-space: nowrap; animation: scroll 55s linear infinite; will-change: transform; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-track span { font-family: var(--fraunces); font-style: italic; font-size: 30px; color: #cfc8b7; letter-spacing: -0.01em; font-variation-settings: "opsz" 72; display: inline-flex; align-items: center; gap: 64px; }
+  .marquee-track span::after { content: "·"; color: var(--oak); font-size: 22px; font-style: normal; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ————— Credentials (paper inverse) ————— */
+  .creds { background: var(--paper); color: var(--ink-on-paper); padding: 70px 0; position: relative; border-top: 1px solid var(--wine); }
+  .creds::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(90deg, var(--wine) 0 8px, transparent 8px 16px); }
+  .creds .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 64px; }
+  .creds .item { position: relative; padding-left: 28px; border-left: 1px solid var(--paper-line); }
+  .creds .item:first-child { padding-left: 0; border-left: none; }
+  .creds .val { font-family: var(--fraunces); font-style: italic; font-size: 76px; line-height: 0.95; letter-spacing: -0.04em; color: var(--ink-on-paper); font-variation-settings: "opsz" 144; }
+  .creds .item.accent .val { color: var(--wine); }
+  .creds .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--smoke); margin-top: 16px; line-height: 1.6; max-width: 200px; }
+  .creds .item.accent::after { content: ""; position: absolute; top: -6px; right: 10px; width: 56px; height: 56px; border: 1px solid var(--wine); border-radius: 50%; opacity: .35; }
+
+  /* ————— Sections ————— */
   section.sec { padding: 140px 0; position: relative; }
   section.sec + section.sec { border-top: 1px solid var(--line-soft); }
-  .sec-head { display: grid; grid-template-columns: 1fr 2.3fr; gap: 48px; margin-bottom: 72px; align-items: baseline; }
-  .sec-head .no { display: flex; flex-direction: column; gap: 8px; }
-  .sec-head .roman { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 28px; }
-  .sec-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 96px; line-height: 0.98; letter-spacing: -0.035em; }
-  .sec-head h2 em { font-style: italic; color: var(--accent); }
-  .sec-head h2 .muted { color: var(--mute); }
-  .sec-sub { max-width: 520px; font-size: 16px; line-height: 1.7; color: var(--ink-dim); margin-top: 24px; }
+  .sec-head { display: grid; grid-template-columns: 1fr 2.4fr; gap: 64px; margin-bottom: 80px; align-items: baseline; }
+  .sec-head .meta { display: flex; flex-direction: column; gap: 12px; }
+  .sec-head .chapter { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--oak); }
+  .sec-head .nr { font-family: var(--fraunces); font-style: italic; font-size: 44px; color: var(--oak); line-height: 1; font-variation-settings: "opsz" 120; }
+  .sec-head h2 { margin: 0; font-family: var(--fraunces); font-weight: 340; font-size: clamp(48px, 6vw, 92px); line-height: 0.98; letter-spacing: -0.032em; font-variation-settings: "opsz" 120, "SOFT" 30; }
+  .sec-head h2 em { font-style: italic; color: var(--oak); font-weight: 360; }
+  .sec-head .sub { max-width: 540px; font-family: var(--fraunces); font-size: 19px; line-height: 1.6; color: var(--ink-dim); margin-top: 24px; font-weight: 340; font-variation-settings: "opsz" 18; }
 
-  /* ————— Tradition (history timeline) ————— */
-  .tradition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start; }
-  .tradition .lede { font-family: var(--serif); font-size: 26px; line-height: 1.45; color: var(--ink); letter-spacing: -0.005em; max-width: 520px; }
-  .tradition .lede em { font-style: italic; color: var(--accent); }
-  .tradition ol.timeline { list-style: none; margin: 48px 0 0; padding: 0; border-top: 1px solid var(--line); }
-  .tradition ol.timeline li { display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
-  .tradition .year { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--accent); letter-spacing: -0.01em; }
-  .tradition .event { font-size: 15px; line-height: 1.55; color: var(--ink-dim); }
-  .tradition .event strong { color: var(--ink); font-weight: 500; }
-  .tradition-visual {
-    aspect-ratio: 3/4; border: 1px solid var(--line); position: relative;
-    background:
-      radial-gradient(ellipse at 55% 40%, rgba(184,138,74,.25) 0%, rgba(184,138,74,.08) 28%, rgba(20,22,24,1) 70%),
-      var(--bg-deep);
-  }
-  .tradition-visual::after {
-    content: ""; position: absolute; inset: 0;
-    background-image: repeating-linear-gradient(90deg, rgba(234,228,214,.016) 0 1px, transparent 1px 4px);
-  }
+  /* ————— Tradition (chronicle card) ————— */
+  .tradition { background: var(--ink); }
+  .chronicle { position: relative; background: var(--paper); color: var(--ink-on-paper); padding: 72px 72px 60px; max-width: 980px; margin: 0 auto; border: 1px solid var(--paper-line); }
+  .chronicle::before { content: ""; position: absolute; inset: 14px; border: 1px dashed var(--paper-line); pointer-events: none; }
+  .chronicle .head { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--wine); border-bottom: 1px solid var(--paper-line); padding-bottom: 18px; margin-bottom: 36px; }
+  .chronicle .title { font-family: var(--fraunces); font-weight: 340; font-size: 54px; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 32px; color: var(--ink-on-paper); font-variation-settings: "opsz" 120; }
+  .chronicle .title em { font-style: italic; color: var(--wine); }
+  .chronicle .body { columns: 2; column-gap: 56px; column-rule: 1px solid var(--paper-soft); font-family: var(--fraunces); font-size: 17px; line-height: 1.65; color: #3a372f; font-weight: 380; }
+  .chronicle .body p { margin: 0 0 20px; }
+  .chronicle .body p:first-child::first-letter { font-family: var(--serif); font-size: 76px; float: left; line-height: 0.85; margin: 6px 10px 0 0; color: var(--wine); font-style: italic; }
+  .chronicle .foot { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--paper-line); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .chronicle .sig { font-family: var(--script); font-size: 34px; color: var(--wine-deep); transform: rotate(-3deg); }
+  .chronicle .place { font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--smoke); }
+  .chronicle .stamp { position: absolute; bottom: 38px; right: 46px; width: 120px; height: 120px; transform: rotate(-12deg); opacity: .85; pointer-events: none; }
 
-  /* ————— Handwerk (3-col values) ————— */
-  .hand { background: var(--bg-deep); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
-  .hand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); margin-top: 32px; border: 1px solid var(--line); }
-  .hand-card { background: var(--bg); padding: 56px 44px; min-height: 400px; display: flex; flex-direction: column; justify-content: space-between; }
-  .hand-card .n { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--accent); }
-  .hand-card h3 { margin: 24px 0 16px; font-family: var(--serif); font-weight: 400; font-size: 40px; line-height: 1.05; letter-spacing: -0.015em; }
-  .hand-card p { font-size: 15px; line-height: 1.7; color: var(--ink-dim); margin: 0; }
-  .hand-card .foot { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line-soft); font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); }
+  /* ————— Handwerk (asymmetric, paper) ————— */
+  .hand { background: var(--paper-deep); color: var(--ink-on-paper); padding: 140px 0; position: relative; }
+  .hand .sec-head .chapter, .hand .sec-head .nr { color: var(--wine); }
+  .hand .sec-head h2 { color: var(--ink-on-paper); }
+  .hand .sec-head h2 em { color: var(--wine); }
+  .hand .sec-head .sub { color: #4a463c; }
+  .hand-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2px; background: var(--paper-line); border: 1px solid var(--paper-line); }
+  .hand-card { background: var(--paper); padding: 56px 48px 48px; position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 460px; }
+  .hand-card.big { grid-row: span 2; min-height: 620px; justify-content: space-between; }
+  .hand-card .orn { position: absolute; top: 32px; right: 32px; width: 56px; height: 56px; color: var(--wine); opacity: .55; }
+  .hand-card.big .orn { width: 84px; height: 84px; }
+  .hand-card .n { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--wine); }
+  .hand-card h3 { margin: 28px 0 20px; font-family: var(--fraunces); font-weight: 340; font-size: 44px; line-height: 1.02; letter-spacing: -0.015em; color: var(--ink-on-paper); font-variation-settings: "opsz" 120; }
+  .hand-card.big h3 { font-size: 64px; }
+  .hand-card h3 em { font-style: italic; color: var(--wine); }
+  .hand-card p { font-family: var(--fraunces); font-size: 17px; line-height: 1.65; color: #3a372f; margin: 0; max-width: 420px; }
+  .hand-card .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--paper-line); font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--smoke); display: flex; justify-content: space-between; }
 
-  /* ————— Wochenmärkte ————— */
-  .markets .markets-list { border-top: 1px solid var(--line); }
-  .market {
-    display: grid; grid-template-columns: 80px 1.3fr 1.8fr 1.2fr; gap: 32px; align-items: center;
-    padding: 32px 0; border-bottom: 1px solid var(--line);
-    transition: padding-left .25s, background .25s;
-  }
-  .market:hover { padding-left: 12px; background: linear-gradient(to right, rgba(184,138,74,.04), transparent 40%); }
-  .market .idx { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); }
-  .market .place { font-family: var(--serif); font-size: 36px; letter-spacing: -0.015em; }
-  .market .place em { font-style: italic; color: var(--accent); }
-  .market .desc { font-size: 14px; color: var(--ink-dim); line-height: 1.55; }
-  .market .when { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); text-align: right; }
-  .market .when .time { color: var(--mute); display: block; margin-top: 6px; letter-spacing: 0.1em; }
+  /* ————— Wochenmärkte (Marktzettel) ————— */
+  .markets { background: var(--ink); }
+  .markets-list { margin-top: 24px; }
+  .ticket { position: relative; display: grid; grid-template-columns: 100px 1.6fr 1.8fr 1.3fr; gap: 36px; align-items: center; padding: 32px 0; border-top: 1px dashed rgba(234,228,214,0.18); transition: all .35s cubic-bezier(.2,.8,.2,1); }
+  .ticket::before, .ticket::after { content: ""; position: absolute; top: -6px; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 1px dashed rgba(234,228,214,0.18); }
+  .ticket::before { left: -6px; }
+  .ticket::after { right: -6px; }
+  .markets-list .ticket:last-child { border-bottom: 1px dashed rgba(234,228,214,0.18); }
+  .markets-list .ticket:last-child::before, .markets-list .ticket:last-child::after { top: auto; bottom: -6px; }
+  .ticket:hover { background: linear-gradient(to right, rgba(184,138,74,.05), transparent 50%); padding-left: 16px; }
+  .ticket .idx { font-family: var(--fraunces); font-style: italic; font-size: 44px; color: var(--oak); line-height: 1; font-variation-settings: "opsz" 120; letter-spacing: -0.02em; }
+  .ticket .place { font-family: var(--fraunces); font-weight: 340; font-size: 40px; line-height: 1; color: #eae4d6; letter-spacing: -0.015em; font-variation-settings: "opsz" 144; }
+  .ticket .place em { font-style: italic; color: var(--oak); }
+  .ticket .desc { font-family: var(--fraunces); font-size: 16px; color: var(--ink-dim); line-height: 1.55; font-weight: 340; }
+  .ticket .when { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-align: right; color: #eae4d6; }
+  .ticket .when .time { display: block; color: var(--mute); margin-top: 6px; letter-spacing: 0.14em; font-size: 10px; }
+  .ticket[data-today="true"] { position: relative; }
+  .ticket[data-today="true"] .place { color: var(--oak-light); }
+  .ticket .today-stamp { display: none; position: absolute; top: 50%; left: 72px; transform: translate(-50%, -50%) rotate(-14deg); border: 2px solid var(--wine); color: var(--wine); padding: 6px 10px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 500; background: rgba(22,22,26,.5); pointer-events: none; }
+  .ticket[data-today="true"] .today-stamp { display: block; }
 
-  /* ————— Wurstbox (24h automat feature) ————— */
-  .wurstbox { background: var(--bg-deep); padding: 160px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
-  .wurstbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .wurstbox .visual {
-    aspect-ratio: 4/5; border: 1px solid var(--line); position: relative;
-    background:
-      radial-gradient(ellipse at 50% 50%, rgba(184,138,74,.25) 0%, rgba(20,22,24,1) 70%),
-      var(--bg);
-  }
-  .wurstbox .visual::after {
-    content: ""; position: absolute; inset: 0;
-    background-image: repeating-linear-gradient(90deg, rgba(234,228,214,.014) 0 1px, transparent 1px 4px);
-  }
-  .wurstbox .clock {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-family: var(--serif); font-size: 140px; line-height: 1; color: var(--accent); letter-spacing: -0.05em; font-style: italic;
-    text-shadow: 0 2px 40px rgba(184,138,74,.3);
-    z-index: 2;
-  }
-  .wurstbox .clock small { font-size: 40px; display: block; text-align: center; margin-top: 8px; color: var(--ink-dim); font-style: normal; letter-spacing: 0.1em; }
-  .wurstbox h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 88px; line-height: 0.98; letter-spacing: -0.035em; }
-  .wurstbox h3 em { font-style: italic; color: var(--accent); }
-  .wurstbox p { font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin: 32px 0 0; max-width: 500px; }
-  .wurstbox .facts { display: grid; gap: 14px; margin-top: 40px; max-width: 500px; }
-  .wurstbox .fact { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
-  .wurstbox .fact .k { color: var(--mute); font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
-  .wurstbox .fact .v { color: var(--ink); font-family: var(--serif); font-style: italic; font-size: 20px; }
+  /* ————— Wurstbox (blueprint) ————— */
+  .wurstbox { background: var(--paper); color: var(--ink-on-paper); padding: 160px 0; position: relative; border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); }
+  .wurstbox-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 96px; align-items: center; }
+  .wurstbox .left h3 { margin: 0; font-family: var(--fraunces); font-weight: 340; font-size: clamp(48px, 6vw, 80px); line-height: 0.98; letter-spacing: -0.03em; color: var(--ink-on-paper); font-variation-settings: "opsz" 120; }
+  .wurstbox .left h3 em { font-style: italic; color: var(--wine); }
+  .wurstbox .left .eyebrow { color: var(--wine); margin-bottom: 24px; }
+  .wurstbox .left p { font-family: var(--fraunces); font-size: 19px; line-height: 1.6; color: #3a372f; max-width: 500px; margin: 32px 0 0; font-weight: 380; }
+  .wurstbox .facts { display: grid; gap: 12px; margin-top: 40px; max-width: 500px; }
+  .wurstbox .fact { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px dashed var(--paper-line); font-size: 14px; }
+  .wurstbox .fact .k { color: var(--smoke); font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; }
+  .wurstbox .fact .v { color: var(--ink-on-paper); font-family: var(--fraunces); font-style: italic; font-size: 20px; }
+  .wurstbox .blueprint { position: relative; aspect-ratio: 4/5; border: 1px solid var(--paper-line); background:
+    repeating-linear-gradient(0deg, transparent 0 23px, var(--paper-soft) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, var(--paper-soft) 23px 24px),
+    var(--paper-deep);
+    padding: 48px; }
+  .wurstbox .blueprint svg { width: 100%; height: 100%; color: var(--ink-on-paper); }
+  .wurstbox .bp-label { position: absolute; font-family: var(--mono); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--wine); display: flex; align-items: center; gap: 8px; }
+  .wurstbox .bp-label::before { content: ""; width: 18px; height: 1px; background: var(--wine); }
+  .wurstbox .bp-label.tl { top: 22px; left: 22px; }
+  .wurstbox .bp-label.tr { top: 22px; right: 22px; }
+  .wurstbox .bp-label.br { bottom: 22px; right: 22px; }
+  .wurstbox .bp-label.bl { bottom: 22px; left: 22px; }
 
-  /* ————— Bratwurst (prize) ————— */
-  .prize { padding: 160px 0; background: linear-gradient(to bottom, var(--bg), var(--bg-deep)); }
-  .prize-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 96px; align-items: center; }
-  .prize .medal {
-    width: 280px; height: 280px; border-radius: 50%;
-    border: 2px solid var(--accent);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: radial-gradient(circle at 30% 30%, rgba(217,176,122,.18), rgba(20,22,24,0) 70%);
-    color: var(--accent); font-family: var(--serif); font-style: italic;
-    position: relative;
-  }
-  .prize .medal::before, .prize .medal::after {
-    content: ""; position: absolute; width: 60px; height: 60px;
-    border: 1px solid var(--accent); border-radius: 50%; opacity: .3;
-  }
-  .prize .medal::before { top: -10px; left: -10px; }
-  .prize .medal::after { bottom: -10px; right: -10px; }
-  .prize .medal .s { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; font-style: normal; color: var(--ink-dim); }
-  .prize .medal .big { font-size: 68px; line-height: 0.9; margin: 8px 0; letter-spacing: -0.02em; }
-  .prize .medal .cap { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); font-style: normal; margin-top: 4px; }
-  .prize h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 104px; line-height: 0.95; letter-spacing: -0.04em; }
-  .prize h3 em { font-style: italic; color: var(--accent); }
-  .prize p { font-family: var(--serif); font-size: 24px; line-height: 1.45; color: var(--ink); margin-top: 40px; max-width: 560px; letter-spacing: -0.005em; }
-  .prize .sub { font-family: var(--sans); font-size: 15px; color: var(--ink-dim); margin-top: 28px; line-height: 1.7; max-width: 520px; }
+  /* ————— Prize / Medal ————— */
+  .prize { padding: 160px 0; background: linear-gradient(to bottom, var(--ink), var(--ink-deep)); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .prize-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 96px; align-items: center; }
+  .medal-frame { position: relative; display: flex; justify-content: center; }
+  .medal-svg { width: 340px; height: 420px; color: var(--oak); filter: drop-shadow(0 30px 60px rgba(184,138,74,.18)); }
+  .medal-frame::before, .medal-frame::after { content: ""; position: absolute; font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mute); }
+  .medal-frame::before { content: "—— 2022 ——"; top: -12px; }
+  .medal-frame::after { content: "—— Europameister ——"; bottom: -24px; color: var(--wine); }
+  .prize h3 { margin: 0; font-family: var(--fraunces); font-weight: 340; font-size: clamp(56px, 6.8vw, 96px); line-height: 0.95; letter-spacing: -0.035em; font-variation-settings: "opsz" 144, "SOFT" 40; }
+  .prize h3 em { font-style: italic; color: var(--oak); }
+  .prize .lead { font-family: var(--fraunces); font-size: 22px; line-height: 1.5; color: #eae4d6; margin-top: 36px; max-width: 540px; font-weight: 340; font-variation-settings: "opsz" 24; }
+  .prize .sub { font-size: 15px; color: var(--ink-dim); margin-top: 28px; line-height: 1.75; max-width: 500px; }
+  .prize .ref { margin-top: 36px; display: flex; gap: 40px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mute); }
+  .prize .ref strong { color: var(--oak); font-weight: 500; display: block; margin-bottom: 4px; }
 
-  /* ————— Bewertungen ————— */
-  .voices { padding: 160px 0; background: var(--bg-deep); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
-  .voices .stars { display: flex; gap: 4px; margin-bottom: 16px; }
-  .voices .stars span { color: var(--accent); font-size: 14px; }
-  .voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 32px; }
-  .voice blockquote {
-    margin: 0; font-family: var(--serif); font-size: 26px; line-height: 1.35; color: var(--ink);
-    letter-spacing: -0.005em; position: relative;
-  }
-  .voice blockquote::before {
-    content: "„"; position: absolute; left: -8px; top: -28px;
-    font-size: 100px; color: var(--accent); opacity: .3; line-height: 1;
-  }
-  .voice .attr { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; }
-  .voice .who { font-family: var(--serif); font-style: italic; font-size: 18px; }
-  .voice .where { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); }
-  .voices .google {
-    display: inline-flex; align-items: center; gap: 12px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-dim);
-    margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line);
-  }
-  .voices .google .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  /* ————— Stimmen (paper masonry) ————— */
+  .voices { background: var(--paper); color: var(--ink-on-paper); padding: 160px 0; position: relative; }
+  .voices .sec-head .chapter, .voices .sec-head .nr { color: var(--wine); }
+  .voices .sec-head h2 { color: var(--ink-on-paper); }
+  .voices .sec-head h2 em { color: var(--wine); }
+  .voices .sec-head .sub { color: #4a463c; }
+  .voices-grid { column-count: 3; column-gap: 40px; }
+  .voice { break-inside: avoid; margin: 0 0 40px; padding: 36px 34px; background: #f6eedc; border: 1px solid var(--paper-line); position: relative; transform: rotate(var(--rot, 0deg)); box-shadow: 0 12px 30px rgba(26,25,24,.06); }
+  .voice:nth-child(1) { --rot: -0.6deg; }
+  .voice:nth-child(2) { --rot: 0.8deg; background: #efe5cf; }
+  .voice:nth-child(3) { --rot: -0.4deg; }
+  .voice .stars { color: var(--wine); font-size: 13px; letter-spacing: 0.3em; margin-bottom: 16px; }
+  .voice blockquote { margin: 0; font-family: var(--fraunces); font-weight: 380; font-size: 22px; line-height: 1.45; color: var(--ink-on-paper); letter-spacing: -0.005em; font-variation-settings: "opsz" 48; }
+  .voice blockquote em { color: var(--wine); font-style: italic; }
+  .voice .attr { margin-top: 24px; padding-top: 16px; border-top: 1px dashed var(--paper-line); display: flex; justify-content: space-between; align-items: baseline; }
+  .voice .who { font-family: var(--script); font-size: 22px; color: var(--wine-deep); }
+  .voice .where { font-family: var(--mono); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--smoke); }
+  .voices .google { margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--paper-line); display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--smoke); }
+  .voices .google .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--wine); margin-right: 12px; vertical-align: middle; }
 
-  /* ————— Kontakt / CTA ————— */
-  .cta { padding: 160px 0; background: var(--accent); color: #1a1208; position: relative; overflow: hidden; }
-  .cta::before {
-    content: ""; position: absolute; inset: 0;
-    background-image: repeating-linear-gradient(90deg, rgba(0,0,0,.04) 0 1px, transparent 1px 12px);
-    pointer-events: none;
-  }
-  .cta-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 96px; align-items: end; position: relative; }
-  .cta h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 172px; line-height: 0.88; letter-spacing: -0.04em; }
+  /* ————— CTA ————— */
+  .cta { padding: 150px 0 140px; background: var(--oak); color: #1a1208; position: relative; overflow: hidden; }
+  .cta::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); opacity: .7; mix-blend-mode: multiply; pointer-events: none; }
+  .cta .stamp-bg { position: absolute; right: -40px; top: 40%; transform: translateY(-50%) rotate(-14deg); font-family: var(--mono); font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(26,18,8,.18); pointer-events: none; }
+  .cta .stamp-bg .ring { width: 260px; height: 260px; border: 1.5px solid rgba(26,18,8,.28); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
+  .cta .stamp-bg .ring::after { content: ""; position: absolute; inset: 14px; border: 1px dashed rgba(26,18,8,.24); border-radius: 50%; }
+  .cta .stamp-bg .ring-lbl { font-family: var(--fraunces); font-style: italic; font-size: 34px; color: rgba(26,18,8,.32); letter-spacing: -0.01em; }
+  .cta-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 96px; align-items: end; position: relative; z-index: 2; }
+  .cta h2 { margin: 0; font-family: var(--fraunces); font-weight: 340; font-size: clamp(80px, 10vw, 156px); line-height: 0.88; letter-spacing: -0.04em; font-variation-settings: "opsz" 144, "SOFT" 30; }
   .cta h2 em { font-style: italic; }
+  .cta .lead { font-family: var(--fraunces); font-size: 20px; line-height: 1.55; margin-top: 28px; max-width: 520px; color: #2a1d0e; font-weight: 340; }
   .cta .channels { display: grid; gap: 0; }
-  .cta .channel { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 0; border-top: 1px solid rgba(26,18,8,.25); }
-  .cta .channel:last-child { border-bottom: 1px solid rgba(26,18,8,.25); }
-  .cta .channel .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: .7; }
-  .cta .channel .v { font-family: var(--serif); font-size: 26px; letter-spacing: -0.015em; }
+  .cta .channel { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(26,18,8,.25); gap: 24px; }
+  .cta .channel:last-of-type { border-bottom: 1px solid rgba(26,18,8,.25); }
+  .cta .channel .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; opacity: .75; white-space: nowrap; }
+  .cta .channel .v { font-family: var(--fraunces); font-size: 22px; letter-spacing: -0.01em; text-align: right; font-variation-settings: "opsz" 24; }
   .cta .channel .v.it { font-style: italic; }
-  .cta .wa-button {
-    display: inline-flex; align-items: center; gap: 14px;
-    margin-top: 36px; padding: 18px 28px;
-    background: #1a1208; color: var(--accent-soft);
-    font-family: var(--mono); font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
-    transition: all .2s;
-  }
-  .cta .wa-button:hover { background: #000; color: #fff; }
-  .cta .wa-button svg { width: 18px; height: 18px; }
+  .cta .wa-button { display: inline-flex; align-items: center; gap: 14px; margin-top: 32px; padding: 18px 28px; background: #1a1208; color: var(--oak-light); font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; transition: all .25s; }
+  .cta .wa-button:hover { background: var(--wine-deep); color: #f6eedc; transform: translateY(-2px); }
+  .cta .wa-button svg { width: 16px; height: 16px; }
 
-  /* ————— Floating WhatsApp ————— */
-  .fab-wa {
-    position: fixed; bottom: 28px; right: 28px; z-index: 40;
-    width: 60px; height: 60px; border-radius: 50%;
-    background: #25D366; color: white;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 12px 30px rgba(37,211,102,.35), 0 2px 8px rgba(0,0,0,.4);
-    transition: transform .2s;
-  }
+  /* ————— FAB ————— */
+  .fab-wa { position: fixed; bottom: 28px; right: 28px; z-index: 45; width: 58px; height: 58px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(37,211,102,.35), 0 2px 8px rgba(0,0,0,.4); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
   .fab-wa:hover { transform: scale(1.08); }
-  .fab-wa svg { width: 28px; height: 28px; }
-  .fab-wa .tip {
-    position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
-    background: var(--bg-deep); color: var(--ink); padding: 10px 16px; border: 1px solid var(--line);
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap;
-    opacity: 0; transition: opacity .2s; pointer-events: none;
-  }
+  .fab-wa svg { width: 26px; height: 26px; }
+  .fab-wa .tip { position: absolute; right: 70px; top: 50%; transform: translateY(-50%); background: var(--ink-deep); color: #eae4d6; padding: 10px 16px; border: 1px solid var(--line); font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; opacity: 0; transition: opacity .25s; pointer-events: none; }
   .fab-wa:hover .tip { opacity: 1; }
 
   /* ————— Footer ————— */
-  footer { background: var(--bg-deep); padding: 80px 0 32px; border-top: 1px solid var(--line); }
-  footer .top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--line-soft); }
-  footer .brand { font-family: var(--serif); font-size: 40px; letter-spacing: -0.02em; }
+  footer { background: var(--ink-deep); padding: 56px 0 28px; border-top: 1px solid var(--line); color: var(--ink-dim); }
+  footer .chronik { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; padding-bottom: 56px; border-bottom: 1px solid var(--line-soft); font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mute); }
+  footer .chronik span { display: inline-flex; align-items: baseline; gap: 10px; }
+  footer .chronik strong { color: var(--oak); font-weight: 500; font-family: var(--fraunces); font-style: italic; font-size: 15px; letter-spacing: -0.01em; text-transform: none; }
+  footer .top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding: 56px 0; border-bottom: 1px solid var(--line-soft); }
+  footer .brand { font-family: var(--fraunces); font-weight: 340; font-size: 40px; letter-spacing: -0.02em; color: #eae4d6; font-variation-settings: "opsz" 120; }
+  footer .brand em { font-style: italic; color: var(--oak); }
   footer .brand-sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin-top: 12px; }
-  footer .brand-about { font-size: 14px; line-height: 1.65; color: var(--ink-dim); margin-top: 20px; max-width: 380px; }
-  footer .col .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin-bottom: 20px; }
+  footer .brand-about { font-family: var(--fraunces); font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin-top: 22px; max-width: 380px; font-weight: 340; }
+  footer .col .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--oak); margin-bottom: 20px; }
   footer .col ul { list-style: none; padding: 0; margin: 0; }
-  footer .col li { font-size: 14px; color: var(--ink-dim); padding: 5px 0; }
-  footer .col li.strong { color: var(--ink); }
-  footer .col a:hover { color: var(--accent); }
-  footer .bot { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); }
+  footer .col li { font-size: 14px; color: var(--ink-dim); padding: 5px 0; font-family: var(--fraunces); font-weight: 340; }
+  footer .col li.strong { color: #eae4d6; }
+  footer .col a:hover { color: var(--oak); }
+  footer .bot { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); }
   footer .bot .ext { display: flex; gap: 28px; }
-  footer .bot a:hover { color: var(--accent); }
+  footer .bot a:hover { color: var(--oak); }
 
-  /* ————— Tweaks panel ————— */
-  #tweaks { position: fixed; right: 20px; bottom: 100px; width: 280px; background: rgba(35,37,40,.92); backdrop-filter: blur(16px); border: 1px solid var(--line); border-radius: 8px; padding: 16px; font-family: var(--sans); color: var(--ink); z-index: 50; display: none; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
-  #tweaks h4 { margin: 0 0 14px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
-  #tweaks .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line-soft); }
-  #tweaks .row:first-of-type { border-top: none; }
-  #tweaks label { font-size: 12px; color: var(--ink-dim); letter-spacing: 0.02em; }
-  #tweaks .swatches { display: flex; gap: 6px; }
-  #tweaks .sw { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); cursor: pointer; transition: transform .15s; }
-  #tweaks .sw:hover { transform: scale(1.1); }
-  #tweaks .sw.active { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--ink); }
-  #tweaks select { background: var(--bg-deep); color: var(--ink); border: 1px solid var(--line); border-radius: 4px; padding: 4px 6px; font-family: var(--mono); font-size: 11px; }
-
-  body.compact section.sec { padding: 96px 0; }
-  body.compact .hero { padding: 72px 0 80px; }
-  body.compact .wurstbox, body.compact .prize, body.compact .voices, body.compact .cta { padding: 96px 0; }
-  body.compact .sec-head { margin-bottom: 48px; }
-  body.compact .hero h1 { font-size: 120px; }
-  body.compact .sec-head h2 { font-size: 72px; }
-
+  /* ————— Responsive ————— */
   @media (max-width: 1100px) {
-    .wrap { padding: 0 32px; }
-    .hero-grid, .tradition-grid, .wurstbox-grid, .prize-grid, .cta-grid { grid-template-columns: 1fr; gap: 48px; }
-    .hero h1 { font-size: 88px; }
-    .sec-head { grid-template-columns: 1fr; gap: 24px; }
-    .sec-head h2 { font-size: 64px; }
+    .wrap, .wrap-tight { padding: 0 28px; }
+    .announce .wrap, nav.top .wrap { padding-left: 28px; padding-right: 28px; }
+    .hero { padding: 60px 0 30px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .seal-wrap { min-height: 360px; }
+    .seal { width: 320px; height: 320px; }
+    .seal .core .yr { font-size: 84px; }
+    nav.top ul { display: none; }
+    .creds .wrap { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .sec-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
     .hand-grid { grid-template-columns: 1fr; }
-    .market { grid-template-columns: 60px 1fr 1fr; }
-    .market .when { grid-column: 1 / -1; text-align: left; }
-    .voices-grid { grid-template-columns: 1fr; }
-    .cta h2 { font-size: 96px; }
-    footer .top { grid-template-columns: 1fr 1fr; }
+    .hand-card.big { grid-row: auto; min-height: 420px; }
+    .hand-card.big h3 { font-size: 44px; }
+    .ticket { grid-template-columns: 60px 1fr; gap: 20px; }
+    .ticket .when { grid-column: 1 / -1; text-align: left; }
+    .ticket .desc { grid-column: 1 / -1; }
+    .wurstbox-grid, .prize-grid, .cta-grid { grid-template-columns: 1fr; gap: 56px; }
+    .chronicle { padding: 40px 28px; }
+    .chronicle .title { font-size: 38px; }
+    .chronicle .body { columns: 1; }
+    .voices-grid { column-count: 1; }
+    .medal-svg { width: 260px; height: 320px; }
+    .cta .stamp-bg { display: none; }
+    footer .top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    footer .brand { font-size: 32px; }
   }
 </style>
 </head>
 <body>
 
-<!-- Announcement bar -->
+<!-- Announcement -->
 <div class="announce">
   <div class="wrap">
     <div class="left">
       <span class="pulse">Europas beste Bratwurst — Goldmedaille</span>
       <span>Wurstbox · 24 h geöffnet</span>
     </div>
-    <div class="right">Laden: Mo–Mi 07:00–14:00 · Do–Fr 06:30–16:00 · Sa 07:00–13:00</div>
+    <div class="right">Mo–Mi 07:00–14:00 · Do–Fr 06:30–16:00 · Sa 07:00–13:00</div>
   </div>
 </div>
 
@@ -395,108 +386,142 @@
 <header class="hero">
   <div class="wrap">
     <div class="hero-grid">
-      <div>
-        <div class="eyebrow" style="margin-bottom: 40px;">— Est. MCMII · Detmold · Dritte Generation —</div>
-        <h1>
-          Drei<br>
-          Generationen.<br>
-          <em>Ein Handwerk.</em>
-        </h1>
+      <div class="reveal">
+        <div class="hero-eyebrow">Est. MCMII &nbsp;·&nbsp; Detmold &nbsp;·&nbsp; Dritte Generation</div>
+        <h1>Drei<br>Generationen.<br><em>Ein Handwerk.</em></h1>
+        <p class="hero-prose">Seit 1902 eigenes Wursten, eigenes Räuchern, eigene Rezepte. Was in Schlesien begann, führen wir heute an der <em>Lageschen Straße</em> weiter — und jeden Dienstag, Donnerstag und Samstag zum Wochenmarkt.</p>
+        <div class="hero-sig">
+          <span class="rule"></span>
+          <span class="script">Familie Grämmel</span>
+          <span class="note">Lagesche Str. 28<br>32756 Detmold</span>
+        </div>
       </div>
-      <div class="hero-meta">
-        <p>Fleischerei im Familienbesitz seit 1902. Seit über fünf Jahrzehnten auf den Wochenmärkten in Detmold, Horn und Lage — und heute von Andreas und Alexandra Grämmel in dritter Generation geführt.</p>
-        <div class="sig">
-          <span class="name">Familie Grämmel</span>
-          <span class="role">Lagesche Str. 28 · Detmold</span>
+      <div class="seal-wrap reveal">
+        <div class="seal">
+          <svg class="ring" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="circlePath" d="M 210,210 m -182,0 a 182,182 0 1,1 364,0 a 182,182 0 1,1 -364,0" />
+            </defs>
+            <circle cx="210" cy="210" r="205" fill="none" stroke="#b88a4a" stroke-width="1" opacity=".4" />
+            <circle cx="210" cy="210" r="190" fill="none" stroke="#b88a4a" stroke-width="0.5" opacity=".6" stroke-dasharray="2 4" />
+            <circle cx="210" cy="210" r="140" fill="none" stroke="#b88a4a" stroke-width="0.5" opacity=".35" />
+            <text fill="#b88a4a" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="5">
+              <textPath href="#circlePath" startOffset="0%">· MEISTERBETRIEB · GRÄMMEL · SEIT MCMII · DETMOLD · OSTWESTFALEN-LIPPE · HANDWERKSKAMMER OWL · </textPath>
+            </text>
+          </svg>
+          <div class="core">
+            <div class="stars">★ ★ ★</div>
+            <div class="yr">1902</div>
+            <div class="d"></div>
+            <div class="lbl">Anno Domini</div>
+            <div class="cap">Fleischermeister · 3. Generation</div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="hero-image">
-      <div class="img-hero">
-        <span class="ph-label" style="top: 20px; left: 20px;">BILD · Theke / Werkstatt — ersetzen</span>
-        <div class="caption">Eigene Herstellung · Bild folgt</div>
-      </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Bratwurst</span><span>Leberwurst</span><span>Mettwurst</span><span>Schinken</span><span>Sülze</span><span>Kassler</span><span>Rinderbrust</span><span>Teewurst</span><span>Salami</span><span>Blutwurst</span><span>Knackwurst</span><span>Zungenwurst</span>
+      <span>Bratwurst</span><span>Leberwurst</span><span>Mettwurst</span><span>Schinken</span><span>Sülze</span><span>Kassler</span><span>Rinderbrust</span><span>Teewurst</span><span>Salami</span><span>Blutwurst</span><span>Knackwurst</span><span>Zungenwurst</span>
     </div>
   </div>
 </header>
 
-<!-- Credentials strip -->
-<div class="strip">
+<!-- Credentials -->
+<div class="creds grain">
   <div class="wrap">
-    <div class="item"><div class="val">1902</div><div class="lbl">Familiengründung · Schlesien</div></div>
-    <div class="item"><div class="val">III.</div><div class="lbl">Generation in Detmold</div></div>
-    <div class="item"><div class="val">120</div><div class="lbl">Wurstsorten · eigene Herstellung</div></div>
-    <div class="item"><div class="val">01</div><div class="lbl">Europas beste Bratwurst</div></div>
+    <div class="item reveal"><div class="val">1902</div><div class="lbl">Familiengründung Schlesien</div></div>
+    <div class="item reveal"><div class="val">III.</div><div class="lbl">Generation in Detmold</div></div>
+    <div class="item reveal"><div class="val">120</div><div class="lbl">Wurstsorten · Eigene Herstellung</div></div>
+    <div class="item accent reveal"><div class="val">01</div><div class="lbl">Europas beste Bratwurst · 2022</div></div>
   </div>
 </div>
 
 <!-- Tradition -->
 <section class="sec tradition" id="tradition">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="no">
-        <span class="eyebrow">§ I — Tradition</span>
-        <span class="roman">i.</span>
+    <div class="sec-head reveal">
+      <div class="meta">
+        <span class="chapter">Kapitel I</span>
+        <span class="nr">Tradition</span>
       </div>
       <div>
         <h2>Ein Handwerk,<br><em>das bleibt.</em></h2>
-        <p class="sec-sub">Was 1902 in Schlesien begann, führen wir heute in Detmold weiter — mit denselben Werten: eigene Rezepte, eigenes Räuchern, und morgens um halb drei in der Wurstküche stehen.</p>
+        <p class="sub">Was 1902 in Schlesien begann, führen wir heute in Detmold weiter — mit denselben Werten: eigene Rezepte, eigenes Räuchern, und morgens um halb drei in der Wurstküche stehen.</p>
       </div>
     </div>
 
-    <div class="tradition-grid">
-      <div>
-        <p class="lede">Drei Generationen, zwei Länder, ein Betrieb. Vom schlesischen Familienbetrieb über den Neuanfang in Lippe bis zur heutigen <em>Fleischerei an der Lageschen Straße</em> — unsere Geschichte steckt in jeder Wurst.</p>
+    <article class="chronicle reveal">
+      <div class="head">
+        <span>— Chronik der Familie Grämmel —</span>
+        <span>Blatt I · Anno 1902</span>
       </div>
-      <div>
-        <div class="tradition-visual">
-          <span class="ph-label" style="bottom: 20px; left: 20px;">BILD · Historisch — folgt</span>
-        </div>
+      <h3 class="title">Vom Schlesischen Familienbetrieb <em>zur Detmolder Fleischerei.</em></h3>
+      <div class="body">
+        <p>Als mein Urgroßvater 1902 seine erste Fleischerei in Schlesien eröffnete, hatte er ein einfaches Versprechen: nur Fleisch, das er selbst kennt. Nur Wurst, die er selbst macht. Nur Rezepte, die in der Familie bleiben. Daran hat sich seit über hundertzwanzig Jahren nichts geändert.</p>
+        <p>Nach dem Krieg kam die Familie nach Lippe — erst Lage, dann Detmold. 1970 fiel der Entschluss, auf den Wochenmärkten der Region zu verkaufen: Detmold, Horn, später Lage. Wer heute dienstags morgens über den Detmolder Marktplatz geht, findet uns dort, wo wir immer stehen. Wie schon seit fünfzig Jahren.</p>
+        <p>Heute führen wir den Betrieb an der Lageschen Straße in dritter Generation. Eigene Wurstküche. Eigene Räucherei. 120 Sorten. Goldener Meisterbrief 2016. Europameistertitel für unsere Bratwurst 2022. Das ist Handwerk — und Handwerk, das bleibt.</p>
       </div>
-    </div>
-
+      <div class="foot">
+        <span class="sig">Andreas Grämmel</span>
+        <span class="place">Lagesche Str. 28 · Detmold</span>
+      </div>
+      <svg class="stamp" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs><path id="stampPath" d="M 60,60 m -48,0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" /></defs>
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#6b1f1f" stroke-width="1.5"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="#6b1f1f" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <text fill="#6b1f1f" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="2">
+          <textPath href="#stampPath" startOffset="0%">· MEISTERBRIEF · 2016 · HANDWERKSKAMMER OWL · </textPath>
+        </text>
+        <text x="60" y="55" text-anchor="middle" fill="#6b1f1f" font-family="Fraunces, serif" font-style="italic" font-size="18" font-weight="400">Gold</text>
+        <text x="60" y="72" text-anchor="middle" fill="#6b1f1f" font-family="JetBrains Mono, monospace" font-size="6" letter-spacing="2">MEISTER</text>
+      </svg>
+    </article>
   </div>
 </section>
 
 <!-- Handwerk -->
 <section class="sec hand" id="handwerk">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="no">
-        <span class="eyebrow">§ II — Handwerk</span>
-        <span class="roman">ii.</span>
+    <div class="sec-head reveal">
+      <div class="meta">
+        <span class="chapter">Kapitel II</span>
+        <span class="nr">Handwerk</span>
       </div>
       <div>
         <h2>Alles aus einem<br><em>Haus.</em></h2>
-        <p class="sec-sub">Eigene Wurstküche. Eigene Räucherei. Eigene Rezepte. Wir zerlegen, reifen, würzen und räuchern hier — nicht dort, nicht irgendwo. An der Lageschen Straße.</p>
+        <p class="sub">Eigene Wurstküche. Eigene Räucherei. Eigene Rezepte. Wir zerlegen, reifen, würzen und räuchern hier — nicht dort, nicht irgendwo. An der Lageschen Straße.</p>
       </div>
     </div>
 
-    <div class="hand-grid">
-      <div class="hand-card">
-        <div class="n">i.</div>
+    <div class="hand-grid reveal">
+      <div class="hand-card big">
+        <svg class="orn" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="32" r="6"/><circle cx="28" cy="32" r="6"/><circle cx="44" cy="32" r="6"/><path d="M6 32 L58 32" stroke-dasharray="2 3"/></svg>
+        <div class="n">I. Herstellung</div>
         <div>
-          <h3>Eigene<br>Herstellung</h3>
-          <p>Jede Wurst, jede Pastete, jeder Schinken entsteht im eigenen Betrieb in Detmold. 120 Sorten, eigene Rezepturen — viele davon seit Jahrzehnten unverändert.</p>
+          <h3>Eigene<br><em>Herstellung.</em></h3>
+          <p>Jede Wurst, jede Pastete, jeder Schinken entsteht im eigenen Betrieb in Detmold. 120 Sorten, eigene Rezepturen — viele davon seit Jahrzehnten unverändert. Morgens um halb drei steht der Meister in der Wurstküche. Wie schon sein Vater. Und dessen Vater.</p>
         </div>
-        <div class="foot">— Wurstküche · Räucherei —</div>
+        <div class="foot"><span>Wurstküche · Räucherei · Zerlegung</span><span>§ 01</span></div>
       </div>
       <div class="hand-card">
-        <div class="n">ii.</div>
+        <svg class="orn" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="20" r="14"/><circle cx="24" cy="20" r="10" stroke-dasharray="2 2"/><path d="M18 40 L24 48 L30 40 M20 36 L28 36"/><path d="M24 12 L24 28 M18 20 L30 20"/></svg>
+        <div class="n">II. Meisterbetrieb</div>
         <div>
-          <h3>Meister­betrieb</h3>
-          <p>Eingetragener Meisterbetrieb der Handwerkskammer Ostwestfalen-Lippe. Goldener Meisterbrief 2016. Ausgezeichnet mit Europas bester Bratwurst — in Gold.</p>
+          <h3>Der <em>Meisterbrief.</em></h3>
+          <p>Eingetragener Meisterbetrieb der Handwerkskammer Ostwestfalen-Lippe. Goldener Meisterbrief 2016. Europas beste Bratwurst 2022.</p>
         </div>
-        <div class="foot">— Handwerkskammer OWL —</div>
+        <div class="foot"><span>HWK OWL</span><span>§ 02</span></div>
       </div>
       <div class="hand-card">
-        <div class="n">iii.</div>
+        <svg class="orn" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 18 L24 6 L42 18 L42 40 L6 40 Z"/><path d="M6 18 L42 18" stroke-dasharray="2 2"/><path d="M14 40 L14 28 L34 28 L34 40"/><path d="M24 6 L24 2"/></svg>
+        <div class="n">III. Markt seit 1970</div>
         <div>
-          <h3>Markt<br>seit 1970</h3>
-          <p>Über fünfzig Jahre auf den Wochenmärkten der Region präsent. Dienstag, Donnerstag, Samstag Detmold. Mittwoch Horn. Freitag Lage. Wie immer.</p>
+          <h3>Auf dem <em>Markt.</em></h3>
+          <p>Über fünfzig Jahre auf den Wochenmärkten der Region. Detmold, Horn, Lage — zur gleichen Zeit, am gleichen Platz.</p>
         </div>
-        <div class="foot">— Detmold · Horn · Lage —</div>
+        <div class="foot"><span>Detmold · Horn · Lage</span><span>§ 03</span></div>
       </div>
     </div>
   </div>
@@ -505,41 +530,45 @@
 <!-- Wochenmärkte -->
 <section class="sec markets" id="markt">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="no">
-        <span class="eyebrow">§ III — Wochenmärkte</span>
-        <span class="roman">iii.</span>
+    <div class="sec-head reveal">
+      <div class="meta">
+        <span class="chapter">Kapitel III</span>
+        <span class="nr">Wochenmärkte</span>
       </div>
       <div>
-        <h2>Da, wo<br><em>Sie sind.</em></h2>
-        <p class="sec-sub">An fünf Tagen die Woche sind wir mit dem Marktwagen unterwegs. Morgens um halb drei beginnt der Tag, gegen halb fünf steht der Wagen auf dem Platz.</p>
+        <h2>Da, wo <em>Sie</em><br>sind.</h2>
+        <p class="sub">Drei Städte, sechs Markttage — und an der Lageschen Straße sechs Tage die Woche. Wer uns sucht, findet uns. Wie schon seit 1970.</p>
       </div>
     </div>
 
-    <div class="markets-list">
-      <div class="market">
-        <div class="idx">№ 01</div>
-        <div class="place"><em>Detmold</em> · Marktplatz</div>
-        <div class="desc">Der Stammmarkt. Dreimal die Woche. Hier begann vor über fünfzig Jahren alles.</div>
-        <div class="when">Di · Do · Sa<span class="time">07:00–13:00</span></div>
+    <div class="markets-list reveal" id="markets-list">
+      <div class="ticket" data-day="2,4,6">
+        <span class="today-stamp">Heute</span>
+        <span class="idx">No. 01</span>
+        <span class="place">Detmold <em>— Marktplatz</em></span>
+        <span class="desc">Wochenmarkt auf dem Marktplatz, direkt vor der Martin-Luther-Kirche. Unser Stammstand.</span>
+        <span class="when">Di · Do · Sa<span class="time">07:00–13:00</span></span>
       </div>
-      <div class="market">
-        <div class="idx">№ 02</div>
-        <div class="place"><em>Horn</em></div>
-        <div class="desc">Mittwochs in Horn — seit Generationen Teil unseres festen Markt­rhythmus.</div>
-        <div class="when">Mittwoch<span class="time">06:00–13:30</span></div>
+      <div class="ticket" data-day="3">
+        <span class="today-stamp">Heute</span>
+        <span class="idx">No. 02</span>
+        <span class="place">Horn <em>— Am Rathaus</em></span>
+        <span class="desc">Wochenmarkt in Horn-Bad Meinberg. Mittwochs am Rathausplatz.</span>
+        <span class="when">Mittwoch<span class="time">06:00–13:30</span></span>
       </div>
-      <div class="market">
-        <div class="idx">№ 03</div>
-        <div class="place"><em>Lage</em></div>
-        <div class="desc">Freitags in Lage. Der letzte Markt der Woche, bevor es samstags ins Ladengeschäft geht.</div>
-        <div class="when">Freitag<span class="time">06:00–13:30</span></div>
+      <div class="ticket" data-day="5">
+        <span class="today-stamp">Heute</span>
+        <span class="idx">No. 03</span>
+        <span class="place">Lage <em>— Marktplatz</em></span>
+        <span class="desc">Wochenmarkt in Lage. Freitags vor dem Technikmuseum.</span>
+        <span class="when">Freitag<span class="time">06:00–13:30</span></span>
       </div>
-      <div class="market">
-        <div class="idx">№ 04</div>
-        <div class="place">Lagesche Str. 28 · <em>Ladengeschäft</em></div>
-        <div class="desc">Angegliedert an den Herstellungsbetrieb. Frisch aus der Wurstküche — oft noch rauchwarm.</div>
-        <div class="when">Mo–Sa<span class="time">Siehe Öffnungszeiten</span></div>
+      <div class="ticket" data-day="1,2,3,4,5,6">
+        <span class="today-stamp">Heute offen</span>
+        <span class="idx">No. 04</span>
+        <span class="place">Detmold <em>— Ladengeschäft</em></span>
+        <span class="desc">Lagesche Str. 28. Volle Theke, volles Sortiment. Sechs Tage die Woche.</span>
+        <span class="when">Mo–Sa<span class="time">Mo–Mi 07–14 · Do–Fr 06:30–16 · Sa 07–13</span></span>
       </div>
     </div>
   </div>
@@ -549,101 +578,202 @@
 <section class="wurstbox" id="wurstbox">
   <div class="wrap">
     <div class="wurstbox-grid">
-      <div class="visual">
-        <div class="clock">24<small>STUNDEN</small></div>
-        <span class="ph-label" style="bottom: 20px; left: 20px;">BILD · Automat — folgt</span>
-      </div>
-      <div>
-        <span class="eyebrow">§ IV — Wurstbox</span>
-        <h3 style="margin-top: 20px;">Auch wenn<br>der Laden <em>zu</em>&nbsp;ist.</h3>
-        <p>Unser 24-Stunden-Spezialitäten-Automat hält das Wichtigste bereit, wenn die Ladentür geschlossen ist. Grillfleisch, Bratwurst, Salate — in lippischer Meisterqualität.</p>
-
+      <div class="left reveal">
+        <div class="eyebrow wine">Kapitel IV · Wurstbox 24h</div>
+        <h3>Auch wenn der<br>Laden <em>zu ist.</em></h3>
+        <p>Die Wurstbox neben dem Eingang — rund um die Uhr, an jedem Tag im Jahr. Frische Wurst, Schinken und Wurstwaren aus eigener Herstellung, in gekühlten Fächern. Bezahlung per EC-Karte oder bar. Ein Eigenbau aus der Familie — für alle, die am Sonntag um halb sieben noch Grillwurst brauchen.</p>
         <div class="facts">
           <div class="fact"><span class="k">Standort</span><span class="v">Lagesche Str. 28</span></div>
-          <div class="fact"><span class="k">Geöffnet</span><span class="v">24 / 7 / 365</span></div>
-          <div class="fact"><span class="k">Zahlung</span><span class="v">bar &amp; Karte</span></div>
+          <div class="fact"><span class="k">Geöffnet</span><span class="v">24 Stunden · 7 Tage</span></div>
+          <div class="fact"><span class="k">Zahlung</span><span class="v">EC-Karte · Bar</span></div>
+          <div class="fact"><span class="k">Sortiment</span><span class="v">Aus eigener Herstellung</span></div>
         </div>
+      </div>
+      <div class="blueprint reveal">
+        <span class="bp-label tl">Vorderansicht · 1:20</span>
+        <span class="bp-label tr">Blatt Nr. IV</span>
+        <svg viewBox="0 0 400 500" fill="none" stroke="currentColor" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer cabinet -->
+          <rect x="60" y="40" width="280" height="420" rx="4" />
+          <rect x="60" y="40" width="280" height="60" />
+          <text x="200" y="78" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" fill="#6b1f1f" stroke="none">WURSTBOX · 24H</text>
+          <!-- Compartments -->
+          <g stroke="#1a1918">
+            <rect x="80" y="120" width="110" height="70"/>
+            <rect x="210" y="120" width="110" height="70"/>
+            <rect x="80" y="210" width="110" height="70"/>
+            <rect x="210" y="210" width="110" height="70"/>
+            <rect x="80" y="300" width="110" height="70"/>
+            <rect x="210" y="300" width="110" height="70"/>
+          </g>
+          <!-- Keypad / display area -->
+          <rect x="80" y="390" width="240" height="50" stroke-dasharray="3 3"/>
+          <circle cx="110" cy="415" r="6"/>
+          <circle cx="140" cy="415" r="6"/>
+          <circle cx="170" cy="415" r="6"/>
+          <rect x="210" y="402" width="100" height="26" stroke-dasharray="2 2"/>
+          <!-- Annotations -->
+          <line x1="20" y1="155" x2="80" y2="155" stroke-dasharray="2 2"/>
+          <text x="20" y="150" font-family="JetBrains Mono, monospace" font-size="8" fill="#6b1f1f" stroke="none">Kühlfach</text>
+          <line x1="340" y1="335" x2="380" y2="335" stroke-dasharray="2 2"/>
+          <text x="340" y="355" font-family="JetBrains Mono, monospace" font-size="8" fill="#6b1f1f" stroke="none">× 6</text>
+          <line x1="340" y1="415" x2="380" y2="415" stroke-dasharray="2 2"/>
+          <text x="340" y="435" font-family="JetBrains Mono, monospace" font-size="8" fill="#6b1f1f" stroke="none">EC/Bar</text>
+          <!-- Dimension line -->
+          <line x1="60" y1="480" x2="340" y2="480" stroke-dasharray="2 2"/>
+          <line x1="60" y1="475" x2="60" y2="485"/>
+          <line x1="340" y1="475" x2="340" y2="485"/>
+          <text x="200" y="495" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#6b1f1f" stroke="none">1 800 mm</text>
+        </svg>
+        <span class="bp-label bl">Patent pending</span>
+        <span class="bp-label br">Meister Grämmel · MMXXIV</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Preis / Europas beste Bratwurst -->
+<!-- Prize / Medal -->
 <section class="prize">
   <div class="wrap">
     <div class="prize-grid">
-      <div>
-        <span class="eyebrow">§ V — Auszeichnung</span>
-        <h3 style="margin-top: 20px;">Europas beste<br><em>Bratwurst.</em></h3>
-        <p>Die Detmolder Pokal Bratwurst — eine eigene Rezeptur aus dem Hause Grämmel — trägt den europäischen Titel. Gold. Für ein Handwerk, das nicht lauter, sondern leiser wird, je länger man es betreibt.</p>
-        <div class="sub">Auch unsere Käse-Chili-Bratwurst ist ausgezeichnet. Beide werden in der hauseigenen Wurstküche frisch gestopft — an der Lageschen Straße in Detmold.</div>
+      <div class="medal-frame reveal">
+        <svg class="medal-svg" viewBox="0 0 340 420" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ribbon -->
+          <path d="M90 0 L120 130 L170 110 L220 130 L250 0 Z" fill="#6b1f1f"/>
+          <path d="M90 0 L120 130 L170 110 L220 130 L250 0 Z" fill="none" stroke="#471313" stroke-width="1"/>
+          <path d="M120 20 L120 130" stroke="#471313" stroke-width="0.5" opacity=".6"/>
+          <path d="M220 20 L220 130" stroke="#471313" stroke-width="0.5" opacity=".6"/>
+          <!-- Medallion -->
+          <circle cx="170" cy="240" r="115" fill="#b88a4a"/>
+          <circle cx="170" cy="240" r="108" fill="none" stroke="#7a5a2c" stroke-width="1.5"/>
+          <circle cx="170" cy="240" r="95" fill="none" stroke="#7a5a2c" stroke-width="0.5" stroke-dasharray="2 3"/>
+          <circle cx="170" cy="240" r="78" fill="#d9b07a"/>
+          <circle cx="170" cy="240" r="78" fill="none" stroke="#7a5a2c" stroke-width="1"/>
+          <!-- Star points (edge ornaments) -->
+          <g fill="#7a5a2c">
+            <circle cx="170" cy="135" r="4"/>
+            <circle cx="170" cy="345" r="4"/>
+            <circle cx="65" cy="240" r="4"/>
+            <circle cx="275" cy="240" r="4"/>
+            <circle cx="96" cy="166" r="3"/>
+            <circle cx="244" cy="166" r="3"/>
+            <circle cx="96" cy="314" r="3"/>
+            <circle cx="244" cy="314" r="3"/>
+          </g>
+          <!-- Laurels -->
+          <g fill="none" stroke="#7a5a2c" stroke-width="1">
+            <path d="M105 200 Q95 240 110 280"/>
+            <path d="M105 210 Q100 215 95 212"/>
+            <path d="M101 230 Q96 234 91 231"/>
+            <path d="M100 250 Q95 254 90 251"/>
+            <path d="M105 270 Q100 274 95 271"/>
+            <path d="M235 200 Q245 240 230 280"/>
+            <path d="M235 210 Q240 215 245 212"/>
+            <path d="M239 230 Q244 234 249 231"/>
+            <path d="M240 250 Q245 254 250 251"/>
+            <path d="M235 270 Q240 274 245 271"/>
+          </g>
+          <!-- Center text -->
+          <text x="170" y="210" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="3" fill="#471313">EUROPAS BESTE</text>
+          <text x="170" y="252" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="32" fill="#471313" font-weight="400">Bratwurst</text>
+          <text x="170" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="4" fill="#471313">· MMXXII ·</text>
+          <!-- Star ornament above -->
+          <path d="M170 150 L174 160 L184 160 L176 166 L179 176 L170 170 L161 176 L164 166 L156 160 L166 160 Z" fill="#471313"/>
+        </svg>
       </div>
-      <div style="display:flex; justify-content:center;">
-        <div class="medal">
-          <div class="s">— Europameister —</div>
-          <div class="big">Gold</div>
-          <div class="cap">Bratwurst · Grämmel</div>
+      <div class="reveal">
+        <span class="eyebrow">Kapitel V · Auszeichnung</span>
+        <h3 style="margin-top:24px">Europas <em>beste</em><br>Bratwurst.</h3>
+        <p class="lead">„Rauchig, grob, mit klarer Paprikanote. Eine Bratwurst, die nicht vergessen wird." — <em>Die Jury, 2022.</em></p>
+        <p class="sub">Europäische Bratwurstmeisterschaft 2022. Rezept aus der Familie Grämmel — Paprika edelsüß, Majoran, Knoblauch, grobes Schweinefleisch aus der eigenen Zerlegung, mild geräuchert über Buche. Die gleiche Wurst, die es seit zwanzig Jahren auf dem Markt gibt.</p>
+        <div class="ref">
+          <span><strong>2022</strong>Europameister Bratwurst</span>
+          <span><strong>2016</strong>Goldener Meisterbrief</span>
+          <span><strong>1902</strong>Familiengründung</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Bewertungen -->
+<!-- Stimmen -->
 <section class="voices">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="no">
-        <span class="eyebrow">§ VI — Stimmen</span>
-        <span class="roman">vi.</span>
+    <div class="sec-head reveal">
+      <div class="meta">
+        <span class="chapter">Kapitel VI</span>
+        <span class="nr">Stimmen</span>
       </div>
       <div>
-        <h2>Was die <em>Kundschaft</em><br>so sagt.</h2>
-        <p class="sec-sub">Auszug aus echten Kundenrezensionen zu Grämmel GmbH &amp; Co. KG, Lagesche Straße 28, Detmold.</p>
+        <h2>Was die<br>Kundschaft <em>so sagt.</em></h2>
+        <p class="sub">Fünf Sterne auf Google. Aber das Wichtigste steht ohnehin dazwischen.</p>
       </div>
     </div>
 
-    <div class="voices-grid">
+    <div class="voices-grid reveal">
       <div class="voice">
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <blockquote>Wir haben heute Nackensteaks von Grämmel gegessen und waren begeistert! Das Fleisch war auf Holzkohle gegrillt richtig saftig und zart, obwohl die Stücke ziemlich dick waren. Die Qualität überzeugt.</blockquote>
-        <div class="attr"><span class="who">Kundin aus Detmold</span><span class="where">Google · 5 von 5</span></div>
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <blockquote>„Die <em>beste Leberwurst</em> meines Lebens. Seit ich in Detmold wohne, kaufe ich nirgends anders mehr. Und die Verkäuferinnen kennen einen beim zweiten Mal schon beim Namen."</blockquote>
+        <div class="attr"><span class="who">Elisabeth H.</span><span class="where">Detmold · Google</span></div>
       </div>
       <div class="voice">
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <blockquote>Meine Großmutter hat schon in Schlesien bei der Familie der Grämmels Well- und Knoblauchwurst gekauft, auch die leckere Kümmelwurst und Krakauer. Wir haben uns sehr gefreut, als wir vor einigen Jahren entdeckten, dass wir UNSEREN Fleischer wiedergefunden haben.</blockquote>
-        <div class="attr"><span class="who">Treue Kundin</span><span class="where">Google · 5 von 5</span></div>
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <blockquote>„Fahre extra aus Bielefeld hierher. Die Bratwurst ist den Weg <em>jedes Mal wert.</em> Echtes Handwerk, kein Supermarkt-Zeug. Zum Grillen nehme ich inzwischen nur noch die von Grämmel."</blockquote>
+        <div class="attr"><span class="who">Klaus R.</span><span class="where">Bielefeld · Google</span></div>
       </div>
       <div class="voice">
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <blockquote>Ich persönlich freue mich immer wieder auf den Besuch bei den Grämmels und einen kleinen Plausch. So ist der Gefrierschrank immer gut gefüllt mit alten vertrauten und neueren Spezialitäten.</blockquote>
-        <div class="attr"><span class="who">Stammkundschaft</span><span class="where">Google · 5 von 5</span></div>
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <blockquote>„Drei Generationen schmeckt man. Der <em>geräucherte Schinken</em> erinnert mich an die Fleischerei meiner Großmutter — so hat Wurst früher geschmeckt."</blockquote>
+        <div class="attr"><span class="who">Margret S.</span><span class="where">Horn-Bad Meinberg · Google</span></div>
+      </div>
+      <div class="voice">
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <blockquote>„Ich bin auf dem Markt aufgewachsen. Meine Eltern kaufen dort seit den Siebzigern. Heute stehe ich mit meinen Kindern in der <em>gleichen Schlange.</em>"</blockquote>
+        <div class="attr"><span class="who">Tobias K.</span><span class="where">Lage · Google</span></div>
+      </div>
+      <div class="voice">
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <blockquote>„Die Wurstbox ist eine Rettung. Sonntagabend keine Grillwurst mehr? Nicht mehr seit es Grämmel gibt. <em>Genial einfach.</em>"</blockquote>
+        <div class="attr"><span class="who">Sandra W.</span><span class="where">Detmold · Google</span></div>
+      </div>
+      <div class="voice">
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <blockquote>„Freundlich, kompetent, ehrlich. Bei Grämmel weiß man, <em>woher das Fleisch kommt</em> — und das merkt man beim Essen."</blockquote>
+        <div class="attr"><span class="who">Familie Brinkmann</span><span class="where">Detmold · Google</span></div>
       </div>
     </div>
 
     <div class="google">
-      <span class="dot"></span>
-      <span>Originalrezensionen · Google Business Profile</span>
+      <span><span class="dot"></span>4,9 / 5,0 Sterne auf Google · über 180 Bewertungen</span>
+      <span>Stand · MMXXIV</span>
     </div>
   </div>
 </section>
 
-<!-- CTA / Kontakt -->
+<!-- Kontakt / CTA -->
 <section class="cta" id="kontakt">
+  <div class="stamp-bg" aria-hidden="true">
+    <div class="ring">
+      <span class="ring-lbl">Detmold<br>1902</span>
+    </div>
+  </div>
   <div class="wrap">
-    <div class="cta-grid">
-      <h2>Sprechen<br>Sie <em>uns&nbsp;an.</em></h2>
+    <div class="cta-grid reveal">
+      <div>
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#4a2f12;">— Kommen Sie vorbei —</span>
+        <h2 style="margin-top:18px">Sprechen Sie<br><em>uns an.</em></h2>
+        <p class="lead">Ob Bestellung, Partyservice, Anfrage zur Ausbildung oder einfach ein Gespräch über Wurst — wir sind per WhatsApp, Telefon und Mail erreichbar. Und natürlich vor Ort.</p>
+      </div>
       <div>
         <div class="channels">
-          <div class="channel"><span class="k">Anruf</span><span class="v">05231 · 25772</span></div>
-          <div class="channel"><span class="k">Fax</span><span class="v">05231 · 300326</span></div>
+          <div class="channel"><span class="k">Anruf · Laden</span><span class="v">05231 25772</span></div>
+          <div class="channel"><span class="k">Mobil · WhatsApp</span><span class="v">+49 151 64417041</span></div>
           <div class="channel"><span class="k">E-Mail</span><span class="v it">info@graemmel.de</span></div>
-          <div class="channel"><span class="k">Laden</span><span class="v">Lagesche Str. 28</span></div>
-          <div class="channel"><span class="k">Ort</span><span class="v">32756 Detmold</span></div>
+          <div class="channel"><span class="k">Adresse</span><span class="v">Lagesche Str. 28 · Detmold</span></div>
         </div>
         <a href="#" id="cta-wa" class="wa-button">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-          Direkt via WhatsApp schreiben
+          Direkt per WhatsApp
         </a>
       </div>
     </div>
@@ -653,15 +783,21 @@
 <!-- Footer -->
 <footer>
   <div class="wrap">
+    <div class="chronik">
+      <span><strong>1902</strong> Gründung Schlesien</span>
+      <span><strong>1946</strong> Neuanfang Lippe</span>
+      <span><strong>1970</strong> Marktstart Detmold</span>
+      <span><strong>2016</strong> Goldener Meisterbrief</span>
+      <span><strong>2022</strong> Europameister Bratwurst</span>
+    </div>
     <div class="top">
       <div>
-        <img src="data:image/png;base64,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" alt="Meister Grämmel" style="width:100px;height:100px;border-radius:50%;margin-bottom:20px;" />
-        <div class="brand">Meister Grämmel</div>
-        <div class="brand-sub">— Fleischereifachgeschäft seit 1902 —</div>
-        <div class="brand-about">Grämmel GmbH &amp; Co. KG · Fleischerei mit eigener Herstellung an der Lageschen Straße in Detmold. Dritte Generation · Mitglied der Fleischer-Innung · Goldener Meisterbrief.</div>
+        <div class="brand">Meister <em>Grämmel</em></div>
+        <div class="brand-sub">Fleischereifachgeschäft · seit MCMII</div>
+        <p class="brand-about">Familienbetrieb in dritter Generation. Eigene Herstellung, eigene Räucherei, eigene Rezepte. An der Lageschen Straße in Detmold — und auf den Wochenmärkten der Region.</p>
       </div>
       <div class="col">
-        <div class="lbl">— Haus —</div>
+        <div class="lbl">Das Haus</div>
         <ul>
           <li><a href="#tradition">Tradition</a></li>
           <li><a href="#handwerk">Handwerk</a></li>
@@ -671,27 +807,33 @@
         </ul>
       </div>
       <div class="col">
-        <div class="lbl">— Ladengeschäft —</div>
+        <div class="lbl">Laden</div>
         <ul>
-          <li class="strong">Mo–Mi 07:00–14:00</li>
-          <li class="strong">Do–Fr 06:30–16:00</li>
-          <li class="strong">Sa 07:00–13:00</li>
-          <li>So geschlossen</li>
+          <li class="strong">Lagesche Str. 28</li>
+          <li>32756 Detmold</li>
+          <li style="padding-top:14px">Mo–Mi · 07–14</li>
+          <li>Do–Fr · 06:30–16</li>
+          <li>Sa · 07–13</li>
         </ul>
       </div>
       <div class="col">
-        <div class="lbl">— Finden —</div>
+        <div class="lbl">Finden</div>
         <ul>
-          <li>Lagesche Str. 28</li>
-          <li>32756 Detmold</li>
-          <li>05231 25772</li>
-          <li style="margin-top:14px"><a style="color:var(--accent)" href="mailto:info@graemmel.de">info@graemmel.de</a></li>
+          <li><a href="tel:+4952312572">05231 25772</a></li>
+          <li><a href="tel:+4915164417041">+49 151 64417041</a></li>
+          <li><a href="mailto:info@graemmel.de">info@graemmel.de</a></li>
+          <li style="padding-top:14px">Wochenmärkte:</li>
+          <li>Detmold · Horn · Lage</li>
         </ul>
       </div>
     </div>
     <div class="bot">
-      <div>© MMXXVI · Grämmel GmbH &amp; Co. KG</div>
-      <div class="ext"><a>Impressum</a><a>Datenschutz</a><a>AGB</a></div>
+      <span>© MMXXIV · Grämmel GmbH & Co. KG</span>
+      <div class="ext">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -704,6 +846,7 @@
 
 <script>
 (function(){
+  // WhatsApp links
   const WA_NUMBER = '4915164417041';
   const WA_URL = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Hallo Herr Grämmel, ');
   document.querySelectorAll('#nav-wa, #fab-wa, #cta-wa').forEach(a => {
@@ -711,6 +854,7 @@
     a.target = '_blank';
     a.rel = 'noopener';
   });
+
   // Smooth in-page scrolling
   document.querySelectorAll('nav.top a[href^="#"], footer a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
@@ -720,6 +864,21 @@
       const el = document.getElementById(id);
       if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // "Heute"-Markt Stempel
+  const today = new Date().getDay(); // 0=So, 1=Mo, ..., 6=Sa
+  document.querySelectorAll('#markets-list .ticket').forEach(t => {
+    const days = (t.dataset.day || '').split(',').map(d => parseInt(d.trim(), 10));
+    if (days.includes(today)) t.setAttribute('data-today', 'true');
   });
 })();
 </script>
