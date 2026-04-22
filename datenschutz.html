@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Datenschutzerklärung · Meister Grämmel · Fleischerei in Detmold</title>
+<meta name="description" content="Datenschutzerklärung der Fleischerei Grämmel gemäß DSGVO." />
+<meta name="robots" content="index,follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink-deep: #0d0d0d; --ink: #16161a;
+    --paper: #f1e8d4; --paper-deep: #e8ddc3; --paper-line: rgba(26,25,24,0.18); --paper-soft: rgba(26,25,24,0.08);
+    --ink-on-paper: #1a1918; --ink-dim: #b0a99a; --mute: #767062;
+    --line: rgba(234,228,214,0.10); --line-soft: rgba(234,228,214,0.06);
+    --oak: #b88a4a; --oak-deep: #7a5a2c; --oak-light: #d9b07a;
+    --wine: #6b1f1f; --wine-deep: #471313; --smoke: #5a4b3a;
+    --fraunces: "Fraunces", "Instrument Serif", Georgia, serif;
+    --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--ink); color: #eae4d6; font-family: var(--sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-feature-settings: "liga", "dlig", "kern"; }
+  body { overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  ::selection { background: var(--oak); color: #120a06; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+
+  nav.top { position: sticky; top: 0; z-index: 40; background: rgba(22,22,26,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; max-width: 1440px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-img { width: 48px; height: 48px; border-radius: 50%; display: block; }
+  .logo-name { line-height: 1; }
+  .logo-name .name { font-family: var(--fraunces); font-weight: 400; font-size: 24px; letter-spacing: -0.01em; }
+  .logo-name .tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin-top: 5px; }
+  nav.top ul { display: flex; gap: 34px; list-style: none; padding: 0; margin: 0; font-size: 13px; color: var(--ink-dim); }
+  nav.top ul a { position: relative; padding: 6px 0; transition: color .2s; }
+  nav.top ul a:hover { color: #eae4d6; }
+  nav.top ul a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--oak); transition: right .3s cubic-bezier(.2,.8,.2,1); }
+  nav.top ul a:hover::after { right: 0; }
+  .btn-wa { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--oak); padding: 10px 16px; border: 1px solid var(--oak); border-radius: 999px; transition: all .25s; }
+  .btn-wa:hover { background: var(--oak); color: var(--ink-deep); }
+  .btn-wa svg { width: 13px; height: 13px; }
+  .nav-toggle { display: none; width: 44px; height: 44px; background: transparent; border: 1px solid var(--line); border-radius: 50%; cursor: pointer; padding: 0; align-items: center; justify-content: center; flex-direction: column; gap: 4px; position: relative; z-index: 52; }
+  .nav-toggle span { width: 18px; height: 1.5px; background: var(--oak); transition: transform .25s, opacity .25s; display: block; }
+  body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+  .nav-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 38; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  body.menu-open .nav-backdrop { opacity: 1; pointer-events: auto; }
+
+  .legal-hero { padding: 100px 0 60px; background: var(--ink); position: relative; }
+  .legal-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 700px 400px at 80% 30%, rgba(184,138,74,.08), transparent 60%); }
+  .legal-hero .wrap { position: relative; }
+  .legal-hero .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--oak); display: block; margin-bottom: 24px; }
+  .legal-hero h1 { margin: 0; font-family: var(--fraunces); font-weight: 340; font-size: clamp(48px, 6vw, 92px); line-height: 0.98; letter-spacing: -0.03em; font-variation-settings: "opsz" 120, "SOFT" 30; }
+  .legal-hero h1 em { font-style: italic; color: var(--oak); }
+  .legal-hero .meta { margin-top: 32px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mute); }
+
+  .legal-body { background: var(--paper); color: var(--ink-on-paper); padding: 100px 0 140px; position: relative; border-top: 1px solid var(--wine); }
+  .legal-body::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(90deg, var(--wine) 0 8px, transparent 8px 16px); }
+  .legal-body .wrap { max-width: 860px; }
+  .legal-body .toc { padding: 28px 32px; background: #f6eedc; border: 1px solid var(--paper-line); margin-bottom: 56px; }
+  .legal-body .toc strong { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--wine); margin-bottom: 16px; }
+  .legal-body .toc ol { padding-left: 22px; margin: 0; font-family: var(--fraunces); font-size: 15px; line-height: 1.75; color: #3a372f; font-weight: 400; }
+  .legal-body .toc ol a { color: var(--ink-on-paper); border-bottom: 1px dotted rgba(26,25,24,.2); }
+  .legal-body .toc ol a:hover { color: var(--wine); border-bottom-color: var(--wine); }
+  .legal-body h2 { font-family: var(--fraunces); font-weight: 340; font-size: 30px; line-height: 1.15; letter-spacing: -0.015em; margin: 56px 0 18px; color: var(--ink-on-paper); font-variation-settings: "opsz" 72; scroll-margin-top: 100px; }
+  .legal-body h2:first-of-type { margin-top: 0; }
+  .legal-body h2 em { font-style: italic; color: var(--wine); }
+  .legal-body h2 .num { color: var(--wine); font-style: italic; margin-right: 12px; }
+  .legal-body h3 { font-family: var(--fraunces); font-weight: 500; font-size: 19px; line-height: 1.25; letter-spacing: -0.005em; margin: 28px 0 12px; color: var(--ink-on-paper); }
+  .legal-body p { font-family: var(--fraunces); font-size: 17px; line-height: 1.7; color: #3a372f; margin: 0 0 16px; font-weight: 380; font-variation-settings: "opsz" 18; }
+  .legal-body p.lede { font-size: 19px; line-height: 1.65; color: var(--ink-on-paper); }
+  .legal-body ul { font-family: var(--fraunces); font-size: 17px; line-height: 1.7; color: #3a372f; padding-left: 22px; margin: 0 0 16px; font-weight: 380; }
+  .legal-body ul li { margin-bottom: 6px; }
+  .legal-body a { color: var(--wine); border-bottom: 1px solid rgba(107,31,31,.3); }
+  .legal-body a:hover { border-bottom-color: var(--wine); }
+  .legal-body strong { font-weight: 500; color: var(--ink-on-paper); }
+  .legal-body .placeholder { background: rgba(107,31,31,0.08); color: var(--wine); padding: 2px 8px; font-family: var(--mono); font-size: 0.85em; letter-spacing: 0.08em; }
+  .legal-body hr { border: none; border-top: 1px dashed var(--paper-line); margin: 40px 0; }
+  .legal-body .block { padding: 22px 26px; background: #f6eedc; border-left: 3px solid var(--wine); margin: 20px 0; font-family: var(--fraunces); font-size: 16px; line-height: 1.7; font-weight: 380; }
+  .legal-body .block strong { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--wine); margin-bottom: 10px; font-weight: 500; }
+  .legal-body .back-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--paper-line); font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--smoke); }
+  .legal-body .back-link:hover { color: var(--wine); border-bottom: none; }
+
+  footer { background: var(--ink-deep); padding: 56px 0 28px; border-top: 1px solid var(--line); color: var(--ink-dim); }
+  footer .top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding: 0 0 56px; border-bottom: 1px solid var(--line-soft); }
+  footer .brand { font-family: var(--fraunces); font-weight: 340; font-size: 40px; letter-spacing: -0.02em; color: #eae4d6; }
+  footer .brand em { font-style: italic; color: var(--oak); }
+  footer .brand-sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin-top: 12px; }
+  footer .brand-about { font-family: var(--fraunces); font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin-top: 22px; max-width: 380px; font-weight: 340; }
+  footer .col .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--oak); margin-bottom: 20px; }
+  footer .col ul { list-style: none; padding: 0; margin: 0; }
+  footer .col li { font-size: 14px; color: var(--ink-dim); padding: 5px 0; font-family: var(--fraunces); font-weight: 340; }
+  footer .col li.strong { color: #eae4d6; }
+  footer .col a:hover { color: var(--oak); }
+  footer .bot { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); }
+  footer .bot .ext { display: flex; gap: 28px; }
+
+  .fab-wa { position: fixed; bottom: 28px; right: 28px; z-index: 45; width: 58px; height: 58px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(37,211,102,.35), 0 2px 8px rgba(0,0,0,.4); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+  .fab-wa:hover { transform: scale(1.08); }
+  .fab-wa svg { width: 26px; height: 26px; }
+
+  @media (max-width: 1100px) {
+    .wrap { padding: 0 28px; }
+    nav.top .wrap { padding: 14px 28px; background: var(--ink-deep); }
+    nav.top { background: var(--ink-deep); backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .logo-name .tag { display: none; }
+    .btn-wa { padding: 9px 14px; font-size: 9px; }
+    .nav-toggle { display: flex; }
+    nav.top ul { display: flex; flex-direction: column; gap: 0; position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 380px; background: var(--ink-deep); padding: 100px 32px 40px; transform: translateX(100%); transition: transform .35s cubic-bezier(.2,.8,.2,1); z-index: 50; border-left: 1px solid var(--line); overflow-y: auto; box-shadow: -30px 0 60px rgba(0,0,0,.5); }
+    body.menu-open nav.top ul { transform: none; }
+    body.menu-open { overflow: hidden; }
+    nav.top ul li { border-bottom: 1px solid var(--line-soft); }
+    nav.top ul a { font-family: var(--fraunces); font-weight: 340; font-size: 30px; padding: 20px 0; display: block; color: #eae4d6; }
+    nav.top ul a::after { display: none; }
+    nav.top ul a:hover { color: var(--oak); }
+    footer .top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    footer .brand { font-size: 32px; }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    nav.top .wrap { padding: 12px 20px; }
+    .logo-img { width: 40px; height: 40px; }
+    .logo-name .name { font-size: 19px; }
+    .legal-hero { padding: 40px 0 32px; }
+    .legal-hero h1 { font-size: 40px; }
+    .legal-body { padding: 60px 0 80px; }
+    .legal-body h2 { font-size: 24px; margin-top: 44px; }
+    .legal-body h3 { font-size: 17px; }
+    .legal-body p, .legal-body ul { font-size: 16px; }
+    .legal-body .toc { padding: 22px 24px; }
+    footer { padding: 40px 0 24px; }
+    footer .top { grid-template-columns: 1fr; gap: 32px; }
+    footer .brand { font-size: 28px; }
+    footer .bot { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .fab-wa { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+    .fab-wa svg { width: 22px; height: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="index.html" class="logo">
+      <img src="data:image/png;base64,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" alt="Meister Grämmel" class="logo-img" />
+      <span class="logo-name">
+        <span class="name">Meister Grämmel</span>
+        <span class="tag">Fleischereifachgeschäft · seit 1902</span>
+      </span>
+    </a>
+    <ul id="nav-menu">
+      <li><a href="index.html#tradition">Tradition</a></li>
+      <li><a href="index.html#handwerk">Handwerk</a></li>
+      <li><a href="index.html#markt">Wochenmärkte</a></li>
+      <li><a href="index.html#wurstbox">Wurstbox</a></li>
+      <li><a href="karriere.html">Karriere</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="#" id="nav-wa" class="btn-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      WhatsApp
+    </a>
+    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-backdrop" aria-hidden="true"></div>
+
+<header class="legal-hero">
+  <div class="wrap">
+    <span class="eyebrow">Rechtliches · DSGVO</span>
+    <h1>Datenschutz­<em>erklärung.</em></h1>
+    <div class="meta">Informationen zur Verarbeitung personenbezogener Daten gemäß Art. 13 DSGVO</div>
+  </div>
+</header>
+
+<main class="legal-body">
+  <div class="wrap">
+
+    <div class="toc">
+      <strong>— Inhalt —</strong>
+      <ol>
+        <li><a href="#vw">Verantwortlicher</a></li>
+        <li><a href="#hosting">Hosting und Bereitstellung der Website</a></li>
+        <li><a href="#log">Server-Logfiles</a></li>
+        <li><a href="#fonts">Google Fonts (Schriftarten)</a></li>
+        <li><a href="#wa">WhatsApp-Kontakt</a></li>
+        <li><a href="#email">Kontakt per E-Mail, Telefon und Formular</a></li>
+        <li><a href="#cookies">Cookies</a></li>
+        <li><a href="#ssl">SSL-/TLS-Verschlüsselung</a></li>
+        <li><a href="#rechte">Ihre Rechte als betroffene Person</a></li>
+        <li><a href="#beschwerde">Beschwerderecht bei der Aufsichtsbehörde</a></li>
+        <li><a href="#aenderung">Änderungen dieser Datenschutzerklärung</a></li>
+      </ol>
+    </div>
+
+    <p class="lede">Wir nehmen den Schutz Ihrer personenbezogenen Daten ernst. Im Folgenden informieren wir Sie nach Art. 13 Datenschutz-Grundverordnung (DSGVO) darüber, welche Daten beim Besuch dieser Website erhoben werden, zu welchem Zweck und auf welcher Rechtsgrundlage dies geschieht, und welche Rechte Sie in Bezug auf diese Daten haben.</p>
+
+    <h2 id="vw"><span class="num">1.</span> Verantwortlicher</h2>
+    <p>Verantwortlicher im Sinne von Art. 4 Nr. 7 DSGVO und anderer nationaler Datenschutzgesetze der Mitgliedsstaaten sowie sonstiger datenschutzrechtlicher Bestimmungen ist:</p>
+    <div class="block">
+      <strong>Verantwortlicher</strong>
+      Andreas Grämmel<br>
+      Meister Grämmel · Fleischereifachgeschäft<br>
+      Lagesche Straße 28<br>
+      32756 Detmold<br>
+      Deutschland<br><br>
+      Telefon: <a href="tel:+4952312572">05231 25772</a><br>
+      Mobil / WhatsApp: <a href="tel:+4915164417041">+49 151 64417041</a><br>
+      E-Mail: <a href="mailto:info@fleischerei24.de">info@fleischerei24.de</a>
+    </div>
+    <p>Einen Datenschutzbeauftragten haben wir nicht bestellt, da die gesetzlichen Voraus­setzungen hierfür nicht vorliegen (Art. 37 DSGVO, § 38 BDSG).</p>
+
+    <h2 id="hosting"><span class="num">2.</span> Hosting und <em>Bereit­stellung</em> der Website</h2>
+    <p>Diese Website wird aktuell auf der Infrastruktur von <strong>GitHub Pages</strong> bereit­gestellt, einem Dienst der GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA. Bei jedem Aufruf der Website werden durch GitHub automatisch technische Verbindungs­daten verarbeitet, insbesondere IP-Adresse, Zeitpunkt des Zugriffs, abgerufene Ressource und User-Agent des Browsers.</p>
+    <p><strong>Zweck:</strong> Betrieb und Auslieferung der Website, Abwehr von Angriffen.<br>
+    <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren und funktionsfähigen Darstellung des Internetauftritts).<br>
+    <strong>Drittland­übermittlung:</strong> GitHub, Inc. kann Daten in die USA übertragen. GitHub ist nach dem EU-US Data Privacy Framework zertifiziert; im Übrigen gelten die Standard­vertrags­klauseln der EU-Kommission.</p>
+    <p>Datenschutzerklärung von GitHub: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">docs.github.com/site-policy/privacy-policies</a>.</p>
+    <p class="placeholder">Hinweis: Sobald die Website auf Hostinger umgezogen wird, wird dieser Abschnitt entsprechend angepasst.</p>
+
+    <h2 id="log"><span class="num">3.</span> Server-Logfiles</h2>
+    <p>Beim Besuch dieser Website erhebt der Hosting-Provider automatisch Informationen in sogenannten Server-Logfiles. Dazu gehören:</p>
+    <ul>
+      <li>IP-Adresse des anfragenden Rechners (ggf. gekürzt)</li>
+      <li>Datum und Uhrzeit des Zugriffs</li>
+      <li>Name und URL der abgerufenen Datei</li>
+      <li>übertragene Datenmenge</li>
+      <li>Meldung über erfolgreichen Abruf (HTTP-Statuscode)</li>
+      <li>Browsertyp, Browser­version und Betriebs­system</li>
+      <li>Referrer-URL (die zuvor besuchte Seite)</li>
+    </ul>
+    <p>Eine Zusammen­führung dieser Daten mit anderen Datenquellen findet nicht statt. Eine Auswertung zu Marketing­zwecken erfolgt nicht.</p>
+    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO.<br>
+    <strong>Speicher­dauer:</strong> nach Maßgabe des Hosting-Providers, i. d. R. wenige Tage, längstens bis zum Wegfall des Zwecks.</p>
+
+    <h2 id="fonts"><span class="num">4.</span> Google Fonts (<em>Schriftarten</em>)</h2>
+    <p>Diese Website nutzt zur einheitlichen Darstellung von Schriftarten die Dienste <strong>Google Fonts</strong>, bereitgestellt über die Google Fonts-CDN der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Beim Aufruf der Website lädt Ihr Browser die verwendeten Schriftarten (Fraunces, Instrument Serif, Inter, JetBrains Mono, Caveat) von Google-Servern. Dabei wird Ihre IP-Adresse an Google übermittelt.</p>
+    <p><strong>Zweck:</strong> Einheitliche, typografisch hochwertige Darstellung der Inhalte.<br>
+    <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer ansprechenden und konsistenten Präsentation).<br>
+    <strong>Drittland­übermittlung:</strong> Google kann Daten in die USA übertragen. Google ist nach dem EU-US Data Privacy Framework zertifiziert.</p>
+    <p>Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</p>
+
+    <h2 id="wa"><span class="num">5.</span> WhatsApp-<em>Kontakt</em></h2>
+    <p>Auf unserer Website finden Sie Links, die Sie direkt zu einer WhatsApp-Konversation mit uns führen (Dienst der WhatsApp Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland). Wenn Sie auf einen dieser Links klicken, verlassen Sie unsere Website und werden zu WhatsApp weitergeleitet.</p>
+    <p>Wir haben <strong>keinen Einfluss</strong> auf die Daten­verarbeitung durch WhatsApp. Sobald Sie uns über WhatsApp kontaktieren, werden Nachrichten­inhalt, Ihre Telefon­nummer, Ihr WhatsApp-Profilname und weitere Metadaten durch WhatsApp und Meta Platforms, Inc. verarbeitet.</p>
+    <p><strong>Rechtsgrundlage</strong> für die Verarbeitung der an uns gesendeten Nachrichten: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen, Durchführung des Kauf-/Ausbildungs­anbahnungs­prozesses) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an schneller Kunden­kommunikation).<br>
+    <strong>Alternative:</strong> Wenn Sie eine Kontakt­aufnahme per WhatsApp vermeiden möchten, kontaktieren Sie uns bitte per Telefon oder E-Mail.</p>
+    <p>Datenschutzerklärung von WhatsApp: <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener">whatsapp.com/legal/privacy-policy-eea</a>.</p>
+
+    <h2 id="email"><span class="num">6.</span> Kontakt per <em>E-Mail, Telefon</em> und Formular</h2>
+    <p>Wenn Sie uns per E-Mail (<a href="mailto:info@fleischerei24.de">info@fleischerei24.de</a>) oder telefonisch (05231 25772 bzw. +49 151 64417041) kontaktieren, verarbeiten wir die von Ihnen übermittelten Daten (Name, Telefon­nummer, E-Mail-Adresse, Anliegen) zur Bearbeitung Ihrer Anfrage.</p>
+    <p><strong>Zweck:</strong> Bearbeitung der Anfrage, ggf. Anbahnung eines Vertrags­verhältnisses oder Ausbildungs­bewerbungs­verfahrens.<br>
+    <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche/vertragliche Maßnahmen) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung Ihrer Anfrage).<br>
+    <strong>Speicher­dauer:</strong> bis zur abschließenden Bearbeitung Ihrer Anfrage; darüber hinaus nur, soweit gesetzliche Aufbewahrungs­pflichten bestehen (z. B. § 147 AO, § 257 HGB).</p>
+
+    <h2 id="cookies"><span class="num">7.</span> Cookies</h2>
+    <p>Diese Website setzt aktuell <strong>keine eigenen Cookies</strong> zur Analyse, zum Tracking oder zur Personalisierung. Es werden weder Einwilligungs­pflichtige Cookies noch Dienste Dritter (wie Google Analytics, Meta Pixel o. ä.) eingesetzt.</p>
+    <p>Sollten in Zukunft Cookies oder vergleichbare Technologien eingesetzt werden, werden wir Sie vorab über einen Cookie-Banner informieren und — soweit erforderlich — Ihre Einwilligung nach § 25 TTDSG einholen.</p>
+
+    <h2 id="ssl"><span class="num">8.</span> SSL-/TLS-<em>Verschlüsselung</em></h2>
+    <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie am „https://" in der Adress­zeile Ihres Browsers und am Schloss-Symbol.</p>
+
+    <h2 id="rechte"><span class="num">9.</span> Ihre <em>Rechte</em> als betroffene Person</h2>
+    <p>Soweit personen­bezogene Daten von Ihnen verarbeitet werden, sind Sie betroffene Person im Sinne der DSGVO und es stehen Ihnen folgende Rechte uns gegenüber zu:</p>
+    <ul>
+      <li><strong>Auskunftsrecht (Art. 15 DSGVO):</strong> Sie können Auskunft über die zu Ihrer Person gespeicherten Daten verlangen.</li>
+      <li><strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Sie können die Berichtigung unrichtiger oder Vervollständigung unvollständiger Daten verlangen.</li>
+      <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Sie können die Löschung Ihrer Daten verlangen, soweit keine gesetzlichen Aufbewahrungs­pflichten entgegenstehen.</li>
+      <li><strong>Recht auf Einschränkung (Art. 18 DSGVO):</strong> Sie können die Einschränkung der Verarbeitung verlangen.</li>
+      <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Sie können verlangen, dass Ihre Daten in einem strukturierten, gängigen und maschinen­lesbaren Format an Sie oder an einen anderen Verantwortlichen übertragen werden.</li>
+      <li><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Sie können der Verarbeitung, die auf Art. 6 Abs. 1 lit. f DSGVO beruht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen.</li>
+      <li><strong>Widerruf der Einwilligung (Art. 7 Abs. 3 DSGVO):</strong> Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen.</li>
+    </ul>
+    <p>Zur Ausübung Ihrer Rechte genügt eine formlose Mitteilung an unsere oben genannten Kontakt­daten.</p>
+
+    <h2 id="beschwerde"><span class="num">10.</span> Beschwerde­recht bei der <em>Aufsichts­behörde</em></h2>
+    <p>Unbeschadet eines anderweitigen verwaltungs­rechtlichen oder gerichtlichen Rechts­behelfs haben Sie das Recht auf Beschwerde bei einer Datenschutz-Aufsichts­behörde, insbesondere in dem Mitgliedsstaat Ihres Aufenthaltsorts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes (Art. 77 DSGVO).</p>
+    <p>Für Nordrhein-Westfalen ist zuständig:</p>
+    <div class="block">
+      Landesbeauftragte für Datenschutz und Informations­freiheit Nordrhein-Westfalen<br>
+      Kavalleriestraße 2–4<br>
+      40213 Düsseldorf<br>
+      Telefon: 0211 38424-0<br>
+      <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener">www.ldi.nrw.de</a>
+    </div>
+
+    <h2 id="aenderung"><span class="num">11.</span> Änderungen dieser <em>Erklärung</em></h2>
+    <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechts­lagen oder bei Änderungen unserer Dienste sowie der Daten­verarbeitung anzupassen. Die jeweils aktuelle Fassung finden Sie stets auf dieser Seite.</p>
+
+    <hr>
+
+    <p class="placeholder">Stand: <span id="stand">wird aktualisiert</span>. Mustertexte wurden an die konkreten Verhältnisse dieser Website angepasst; gleichwohl ersetzt diese Datenschutzerklärung keine rechtliche Einzelfall­beratung. Vor Veröffentlichung im Rahmen des Go-Lives empfehlen wir eine Prüfung durch einen Rechts­anwalt oder eine Rechts­anwältin mit Schwerpunkt Datenschutz­recht.</p>
+
+    <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="brand">Meister <em>Grämmel</em></div>
+        <div class="brand-sub">Fleischereifachgeschäft · seit MCMII</div>
+        <p class="brand-about">Familienbetrieb in dritter Generation. Eigene Herstellung, eigene Räucherei, eigene Rezepte. An der Lageschen Straße in Detmold.</p>
+      </div>
+      <div class="col">
+        <div class="lbl">Das Haus</div>
+        <ul>
+          <li><a href="index.html#tradition">Tradition</a></li>
+          <li><a href="index.html#handwerk">Handwerk</a></li>
+          <li><a href="index.html#markt">Wochenmärkte</a></li>
+          <li><a href="index.html#wurstbox">Wurstbox 24h</a></li>
+          <li><a href="karriere.html">Karriere</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="lbl">Laden</div>
+        <ul>
+          <li class="strong">Lagesche Str. 28</li>
+          <li>32756 Detmold</li>
+          <li style="padding-top:14px">Mo–Mi · 07–14</li>
+          <li>Do–Fr · 06:30–16</li>
+          <li>Sa · 07–13</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="lbl">Finden</div>
+        <ul>
+          <li><a href="tel:+4952312572">05231 25772</a></li>
+          <li><a href="tel:+4915164417041">+49 151 64417041</a></li>
+          <li><a href="mailto:info@fleischerei24.de">info@fleischerei24.de</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bot">
+      <span>© MMXXIV · Meister Grämmel · Detmold</span>
+      <div class="ext"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" id="fab-wa" class="fab-wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+(function(){
+  const WA_NUMBER = '4915164417041';
+  const WA_URL = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Hallo Herr Grämmel, ');
+  document.querySelectorAll('#nav-wa, #fab-wa').forEach(a => { a.href = WA_URL; a.target = '_blank'; a.rel = 'noopener'; });
+
+  const toggle = document.querySelector('.nav-toggle');
+  const backdrop = document.querySelector('.nav-backdrop');
+  const closeMenu = () => { document.body.classList.remove('menu-open'); if (toggle) toggle.setAttribute('aria-expanded', 'false'); };
+  if (toggle) toggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+  });
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
+  document.querySelectorAll('#nav-menu a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+  // Stand-Datum (aktueller Monat + Jahr)
+  const stand = document.getElementById('stand');
+  if (stand) {
+    const monate = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+    const d = new Date();
+    stand.textContent = monate[d.getMonth()] + ' ' + d.getFullYear();
+  }
+})();
+</script>
+
+</body>
+</html>
